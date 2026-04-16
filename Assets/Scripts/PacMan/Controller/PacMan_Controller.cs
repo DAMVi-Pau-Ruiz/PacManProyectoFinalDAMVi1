@@ -12,8 +12,6 @@ public class PacMan_Controller : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
-    private bool enNodo = false;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +22,7 @@ public class PacMan_Controller : MonoBehaviour
     {
         Vector2 input = value.Get<Vector2>();
 
+        // evitar diagonales
         if (input.x != 0 && input.y != 0)
             input.y = 0;
 
@@ -33,65 +32,43 @@ public class PacMan_Controller : MonoBehaviour
 
     private void FixedUpdate()
     {
+        TryChangeDirection();
         Move();
     }
 
     void Move()
     {
-        // ?? SOLO girar en nodo
-        if (enNodo && CanMove(desiredDirection))
-        {
-            currentDirection = desiredDirection;
-            RotatePacMan();
-        }
-
-        Vector2 nextPos = rb.position + currentDirection * speed * Time.fixedDeltaTime;
-
-        if (!IsBlocked(currentDirection))
-        {
-            rb.MovePosition(nextPos);
-        }
+        rb.MovePosition(rb.position + currentDirection * speed * Time.fixedDeltaTime);
 
         animator.SetBool("isMoving", currentDirection != Vector2.zero);
     }
 
-    bool IsBlocked(Vector2 dir)
+    void TryChangeDirection()
     {
-        return Physics2D.BoxCast(
-            rb.position,
-            new Vector2(0.3f, 0.3f),
-            0f,
-            dir,
-            0.5f,
-            capaPared
-        );
+        if (desiredDirection == Vector2.zero)
+            return;
+
+        // giro inmediato si no hay pared
+        if (!IsBlocked(desiredDirection))
+        {
+            currentDirection = desiredDirection;
+            RotatePacMan();
+        }
     }
 
-    bool CanMove(Vector2 dir)
+    bool IsBlocked(Vector2 dir)
     {
-        return !IsBlocked(dir);
+        return Physics2D.Raycast(
+            rb.position,
+            dir,
+            0.6f,
+            capaPared
+        );
     }
 
     void RotatePacMan()
     {
         float angle = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
-    }
-
-    // ?? NODOS = puntos de decisión
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Nodo"))
-        {
-            enNodo = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Nodo"))
-        {
-            enNodo = false;
-        }
     }
 }
