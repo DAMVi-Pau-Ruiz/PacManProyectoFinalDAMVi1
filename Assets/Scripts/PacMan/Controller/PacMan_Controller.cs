@@ -1,61 +1,137 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class PacMan_Controller : MonoBehaviour
 {
     [SerializeField] float speed;
+    [SerializeField] LayerMask capaPared;
 
-    private Vector2 moveInput;
-    private Vector2 currentDirection;
+    private Vector2 desiredDirection;
+    private Vector2 currentDirection = Vector2.right;
 
-    private Rigidbody2D rb;
+    private bool estaNodo = false;
+    private bool giroNodoFlag = false;
+
     private Animator animator;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-        currentDirection = Vector2.right;
     }
 
     public void OnMove(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
+        Vector2 input = value.Get<Vector2>();
 
+        // evitar diagonales
+        if (input.x != 0 && input.y != 0)
+            input.y = 0;
 
-        if (moveInput.x != 0 && moveInput.y != 0)
+        if (input != Vector2.zero)
+            desiredDirection = input;
+    }
+
+    private void Update()
+    {
+        TryChangeDirection();
+        Move();
+    }
+
+    void Move()
+    {
+        Vector2 pos = transform.position;
+
+        // ?? bloqueo frontal
+        if (IsBlocked(currentDirection))
         {
-            moveInput.x = 0;
+            currentDirection = Vector2.zero;
         }
 
+        // ?? auto-alineado suave (clave para quitar tirones)
+        float cx = Mathf.Floor(pos.x) + 0.5f;
+        float cy = Mathf.Floor(pos.y) + 0.5f;
+
+        float alignSpeed = 20f;
+
+        if (currentDirection == Vector2.right || currentDirection == Vector2.left)
+        {
+            pos.y = Mathf.Lerp(pos.y, cy, alignSpeed * Time.deltaTime);
+        }
+        else if (currentDirection == Vector2.up || currentDirection == Vector2.down)
+        {
+            pos.x = Mathf.Lerp(pos.x, cx, alignSpeed * Time.deltaTime);
+        }
+
+        // ?? movimiento principal
+        pos += currentDirection * speed * Time.deltaTime;
+
+        transform.position = pos;
+
+        animator.SetBool("isMoving", currentDirection != Vector2.zero);
+    }
+
+    void TryChangeDirection()
+    {
+        // ?? salir de idle
+        if (currentDirection == Vector2.zero && desiredDirection != Vector2.zero)
+        {
+            if (!IsBlocked(desiredDirection))
+            {
+                currentDirection = desiredDirection;
+                RotatePacMan();
+                return;
+            }
+        }
+
+        // ?? giro 180° siempre permitido
+        if (desiredDirection == -currentDirection && desiredDirection != Vector2.zero)
+        {
+            currentDirection = desiredDirection;
+            RotatePacMan();
+            return;
+        }
+
+        // ?? giros normales solo en nodo
+        if (!estaNodo || giroNodoFlag)
+            return;
+
+        if (desiredDirection != Vector2.zero && !IsBlocked(desiredDirection))
+        {
+            currentDirection = desiredDirection;
+            RotatePacMan();
+            giroNodoFlag = true;
+        }
+    }
+
+    bool IsBlocked(Vector2 dir)
+    {
+        Vector2 size = new Vector2(0.25f, 0.25f);
+        float distance = 0.5f;
+
+        return Physics2D.BoxCast(transform.position, size, 0f, dir, distance, capaPared);
     }
 
     void RotatePacMan()
     {
-        if (moveInput != Vector2.zero)
-        {
-            float angle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
-            /*Atan2 convierte un vector (x,y) en un ángulo en radianes
-             Devuelve radianes ? los convertimos a grados con Rad2Deg*/
+        float angle = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
 
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Nodo"))
+        {
+            estaNodo = true;
+            giroNodoFlag = false;
         }
     }
 
-    private void FixedUpdate()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        rb.velocity = currentDirection * speed;
-
-        animator.SetBool("isMoving", true);
-
-        if (moveInput != Vector2.zero)
+        if (collision.CompareTag("Nodo"))
         {
-            currentDirection = moveInput;
+            estaNodo = false;
+            giroNodoFlag = false;
         }
-
-        RotatePacMan();
-
     }
 }
