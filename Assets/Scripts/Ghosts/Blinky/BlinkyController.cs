@@ -9,9 +9,6 @@ public class BlinkyController : MonoBehaviour
     float speed;
 
     [SerializeField]
-    GameObject pacman;
-
-    [SerializeField]
     LayerMask capaPared;
 
     private Vector2 currentDirection = Vector2.left;
@@ -20,9 +17,11 @@ public class BlinkyController : MonoBehaviour
     private bool giroNodoFlag = false;
     private bool giroIzquierda = true;
     private bool giroDerecha = true;
+    private GameObject playerObj;
     private void Start()
     {
         rgb = GetComponent<Rigidbody2D>();
+        BuscarPlayer();
 
         //ransform.position = new Vector3(
         //Mathf.Round(transform.position.x),
@@ -33,6 +32,11 @@ public class BlinkyController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (playerObj == null)
+        {
+            BuscarPlayer();
+        }
+
         Move();
         TryChangeDirection();
     }
@@ -49,7 +53,7 @@ public class BlinkyController : MonoBehaviour
             Debug.Log("Giro");
             List<Vector2> dirs = GetAvailableDirection();
 
-            Vector2 target = pacman.transform.position;
+            Vector2 target = playerObj.transform.position;
             float bestDist = Mathf.Infinity;
             Vector2 bestDir = currentDirection;
 
@@ -146,5 +150,10 @@ public class BlinkyController : MonoBehaviour
         {
             giroDerecha = true;
         }
+    }
+
+    void BuscarPlayer()
+    {
+        playerObj = GameObject.FindGameObjectWithTag("Player");
     }
 }

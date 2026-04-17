@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+
 
 public class PacMan_Controller : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PacMan_Controller : MonoBehaviour
 
     private bool estaNodo = false;
     private bool giroNodoFlag = false;
+    private bool isDead = false;
 
     private Animator animator;
 
@@ -39,35 +42,38 @@ public class PacMan_Controller : MonoBehaviour
 
     void Move()
     {
-        Vector2 pos = transform.position;
-
-        // ?? bloqueo frontal
-        if (IsBlocked(currentDirection))
+        if (!isDead)
         {
-            currentDirection = Vector2.zero;
+            Vector2 pos = transform.position;
+
+            // ?? bloqueo frontal
+            if (IsBlocked(currentDirection))
+            {
+                currentDirection = Vector2.zero;
+            }
+
+            // ?? auto-alineado suave (clave para quitar tirones)
+            float cx = Mathf.Floor(pos.x) + 0.5f;
+            float cy = Mathf.Floor(pos.y) + 0.5f;
+
+            float alignSpeed = 20f;
+
+            if (currentDirection == Vector2.right || currentDirection == Vector2.left)
+            {
+                pos.y = Mathf.Lerp(pos.y, cy, alignSpeed * Time.deltaTime);
+            }
+            else if (currentDirection == Vector2.up || currentDirection == Vector2.down)
+            {
+                pos.x = Mathf.Lerp(pos.x, cx, alignSpeed * Time.deltaTime);
+            }
+
+            // ?? movimiento principal
+            pos += currentDirection * speed * Time.deltaTime;
+
+            transform.position = pos;
+
+            animator.SetBool("isMoving", currentDirection != Vector2.zero);
         }
-
-        // ?? auto-alineado suave (clave para quitar tirones)
-        float cx = Mathf.Floor(pos.x) + 0.5f;
-        float cy = Mathf.Floor(pos.y) + 0.5f;
-
-        float alignSpeed = 20f;
-
-        if (currentDirection == Vector2.right || currentDirection == Vector2.left)
-        {
-            pos.y = Mathf.Lerp(pos.y, cy, alignSpeed * Time.deltaTime);
-        }
-        else if (currentDirection == Vector2.up || currentDirection == Vector2.down)
-        {
-            pos.x = Mathf.Lerp(pos.x, cx, alignSpeed * Time.deltaTime);
-        }
-
-        // ?? movimiento principal
-        pos += currentDirection * speed * Time.deltaTime;
-
-        transform.position = pos;
-
-        animator.SetBool("isMoving", currentDirection != Vector2.zero);
     }
 
     void TryChangeDirection()
@@ -124,6 +130,14 @@ public class PacMan_Controller : MonoBehaviour
             estaNodo = true;
             giroNodoFlag = false;
         }
+        else if (collision.CompareTag("Enemy"))
+        {
+            isDead = true;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            animator.SetBool("isDead", true);
+
+            StartCoroutine(DeathSequence());
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -133,5 +147,11 @@ public class PacMan_Controller : MonoBehaviour
             estaNodo = false;
             giroNodoFlag = false;
         }
+    }
+
+    private IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(0.9f); // duración animación
+        GameManager.instance.KillPacman(gameObject);
     }
 }
