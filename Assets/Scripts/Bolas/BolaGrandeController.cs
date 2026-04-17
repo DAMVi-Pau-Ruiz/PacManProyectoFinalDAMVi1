@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class BolaGrandeController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] int puntos = 1000;
+
+    private void Start()
     {
-        
+        BolasManager.Instance.RegisterPellet();
+        transform.localScale *= 2f;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PacMan_Puntuaje>().addPuntos(puntos);
+
+            BolasManager.Instance.PelletEaten();
+
+            Destroy(gameObject);
+        }
     }
 }

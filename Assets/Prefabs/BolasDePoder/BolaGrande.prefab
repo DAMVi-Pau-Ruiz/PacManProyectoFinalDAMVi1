@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8886023323215782855}
   - component: {fileID: 4264645072480370033}
   - component: {fileID: 8459887327987149456}
+  - component: {fileID: 5097067957132865602}
   m_Layer: 0
   m_Name: BolaGrande
   m_TagString: Untagged
@@ -120,3 +121,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!114 &5097067957132865602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694361304436117394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e837ab4dc62fac45aa09b75cce814c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

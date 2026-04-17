@@ -1038,7 +1038,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bolasPetit: {fileID: 1198065913}
+  bolasGrandes: {fileID: 168516841}
   bolaPetitPrefab: {fileID: 4473578303371819638, guid: 9e51c56b83a447f429001a39db668687, type: 3}
+  bolaGrandePrefab: {fileID: 6694361304436117394, guid: 035b8d742e921994dbc23a2cdc6f1cf8, type: 3}
 --- !u!1 &317958970
 GameObject:
   m_ObjectHideFlags: 0
@@ -5623,7 +5625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9cb9b7febf92a4ca3ae4b5ee8eab4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 1.5
   capaPared:
     serializedVersion: 2
     m_Bits: 64

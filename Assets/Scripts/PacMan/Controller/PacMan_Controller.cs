@@ -151,7 +151,7 @@ public class PacMan_Controller : MonoBehaviour
 
     private IEnumerator DeathSequence()
     {
-        yield return new WaitForSeconds(0.9f); // duración animación
+        yield return new WaitForSeconds(0.9f);
         GameManager.instance.KillPacman(gameObject);
     }
 }
