@@ -19,6 +19,11 @@ public class PacMan_Controller : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    public Vector2 getCurrentDirection()
+    {
+        return currentDirection;
+    }
+
     public void OnMove(InputValue value)
     {
         Vector2 input = value.Get<Vector2>();
