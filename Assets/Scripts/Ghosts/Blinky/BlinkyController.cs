@@ -42,13 +42,10 @@ public class BlinkyController : MonoBehaviour
 
     void TryChangeDirection()
     {
-        //if (!IsAtCenterOfTile()) return;
         if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
         {
             Debug.Log("Giro");
             List<Vector2> dirs = GetAvailableDirection();
-
-            dirs.Remove(-currentDirection);
 
             Vector2 target = pacman.transform.position;
             float bestDist = Mathf.Infinity;
