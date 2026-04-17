@@ -9,12 +9,13 @@ public class PacMan_Controller : MonoBehaviour
     private Vector2 desiredDirection;
     private Vector2 currentDirection = Vector2.right;
 
-    private Rigidbody2D rb;
+    private bool estaNodo = false;
+    private bool giroNodoFlag = false;
+
     private Animator animator;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
@@ -30,7 +31,7 @@ public class PacMan_Controller : MonoBehaviour
             desiredDirection = input;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         TryChangeDirection();
         Move();
@@ -38,37 +39,99 @@ public class PacMan_Controller : MonoBehaviour
 
     void Move()
     {
-        rb.MovePosition(rb.position + currentDirection * speed * Time.fixedDeltaTime);
+        Vector2 pos = transform.position;
+
+        // ?? bloqueo frontal
+        if (IsBlocked(currentDirection))
+        {
+            currentDirection = Vector2.zero;
+        }
+
+        // ?? auto-alineado suave (clave para quitar tirones)
+        float cx = Mathf.Floor(pos.x) + 0.5f;
+        float cy = Mathf.Floor(pos.y) + 0.5f;
+
+        float alignSpeed = 20f;
+
+        if (currentDirection == Vector2.right || currentDirection == Vector2.left)
+        {
+            pos.y = Mathf.Lerp(pos.y, cy, alignSpeed * Time.deltaTime);
+        }
+        else if (currentDirection == Vector2.up || currentDirection == Vector2.down)
+        {
+            pos.x = Mathf.Lerp(pos.x, cx, alignSpeed * Time.deltaTime);
+        }
+
+        // ?? movimiento principal
+        pos += currentDirection * speed * Time.deltaTime;
+
+        transform.position = pos;
 
         animator.SetBool("isMoving", currentDirection != Vector2.zero);
     }
 
     void TryChangeDirection()
     {
-        if (desiredDirection == Vector2.zero)
-            return;
+        // ?? salir de idle
+        if (currentDirection == Vector2.zero && desiredDirection != Vector2.zero)
+        {
+            if (!IsBlocked(desiredDirection))
+            {
+                currentDirection = desiredDirection;
+                RotatePacMan();
+                return;
+            }
+        }
 
-        // giro inmediato si no hay pared
-        if (!IsBlocked(desiredDirection))
+        // ?? giro 180° siempre permitido
+        if (desiredDirection == -currentDirection && desiredDirection != Vector2.zero)
         {
             currentDirection = desiredDirection;
             RotatePacMan();
+            return;
+        }
+
+        // ?? giros normales solo en nodo
+        if (!estaNodo || giroNodoFlag)
+            return;
+
+        if (desiredDirection != Vector2.zero && !IsBlocked(desiredDirection))
+        {
+            currentDirection = desiredDirection;
+            RotatePacMan();
+            giroNodoFlag = true;
         }
     }
 
     bool IsBlocked(Vector2 dir)
     {
-        return Physics2D.Raycast(
-            rb.position,
-            dir,
-            0.6f,
-            capaPared
-        );
+        Vector2 size = new Vector2(0.25f, 0.25f);
+        float distance = 0.5f;
+
+        return Physics2D.BoxCast(transform.position, size, 0f, dir, distance, capaPared);
     }
 
     void RotatePacMan()
     {
         float angle = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Nodo"))
+        {
+            estaNodo = true;
+            giroNodoFlag = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Nodo"))
+        {
+            estaNodo = false;
+            giroNodoFlag = false;
+        }
     }
 }
