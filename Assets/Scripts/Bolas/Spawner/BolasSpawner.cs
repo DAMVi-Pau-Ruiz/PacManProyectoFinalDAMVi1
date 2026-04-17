@@ -13,9 +13,9 @@ public class BolasSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnBolasFromTilemap(bolasPetit, bolaPetitPrefab);
-
-        bolasPetit.ClearAllTiles();
+        Respawn();
+        bolasPetit.GetComponent<TilemapRenderer>().enabled = false;
+        //bolasPetit.ClearAllTiles();
     }
 
     void SpawnBolasFromTilemap(Tilemap tilemap, GameObject prefab)
@@ -34,4 +34,11 @@ public class BolasSpawner : MonoBehaviour
             Instantiate(prefab, worldPos, Quaternion.identity);
         }
     }
+
+    public void Respawn()
+    {
+        BolasManager.Instance.ResetCounter();
+        SpawnBolasFromTilemap(bolasPetit, bolaPetitPrefab);
+    }
+
 }

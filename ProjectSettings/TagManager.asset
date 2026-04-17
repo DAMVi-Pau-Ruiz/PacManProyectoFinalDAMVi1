@@ -8,6 +8,7 @@ TagManager:
   - Nodo
   - BolasPetit
   - BolasGrandes
+  - Enemy
   layers:
   - Default
   - TransparentFX

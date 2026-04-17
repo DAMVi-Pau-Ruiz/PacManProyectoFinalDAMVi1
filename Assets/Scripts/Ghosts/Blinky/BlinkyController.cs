@@ -18,6 +18,8 @@ public class BlinkyController : MonoBehaviour
     private Rigidbody2D rgb;
     private bool estaNodo = false;
     private bool giroNodoFlag = false;
+    private bool giroIzquierda = true;
+    private bool giroDerecha = true;
     private void Start()
     {
         rgb = GetComponent<Rigidbody2D>();
@@ -89,9 +91,15 @@ public class BlinkyController : MonoBehaviour
     {
         List<Vector2> dirs = new List<Vector2>();
         if (CanMove(Vector2.up)) dirs.Add(Vector2.up);
-        if (CanMove(Vector2.left)) dirs.Add(Vector2.left);
+        if (giroIzquierda)
+        {
+            if (CanMove(Vector2.left)) dirs.Add(Vector2.left);
+        }
         if (CanMove(Vector2.down)) dirs.Add(Vector2.down);
-        if (CanMove(Vector2.right)) dirs.Add(Vector2.right);
+        if (giroDerecha)
+        {
+            if (CanMove(Vector2.right)) dirs.Add(Vector2.right);
+        }
 
         return dirs;
     }
@@ -114,6 +122,29 @@ public class BlinkyController : MonoBehaviour
             estaNodo = false;
             giroNodoFlag = false;
             return;
+        }
+    }
+
+    public void ActivateDirectionLR(bool izquierda)
+    {
+        if (izquierda)
+        {
+            giroIzquierda = false;
+        }
+        else
+        {
+            giroDerecha = false;
+        }
+    }
+    public void DeactivateDirectionLR(bool izquierda)
+    {
+        if (izquierda)
+        {
+            giroIzquierda = true;
+        }
+        else
+        {
+            giroDerecha = true;
         }
     }
 }
