@@ -18,27 +18,28 @@ public class BlinkyController : MonoBehaviour
     private bool giroIzquierda = true;
     private bool giroDerecha = true;
     private GameObject playerObj;
+    private Vector2 ultimaCasillaSegura;
+
     private void Start()
     {
         rgb = GetComponent<Rigidbody2D>();
         BuscarPlayer();
-
-        //ransform.position = new Vector3(
-        //Mathf.Round(transform.position.x),
-        //Mathf.Round(transform.position.y),
-        //0
-        //);
     }
 
     private void FixedUpdate()
     {
+        playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        UpdateUltimaCasillaSegura();
+
         if (playerObj == null)
         {
-            BuscarPlayer();
+            transform.position = ultimaCasillaSegura;
+            rgb.velocity = Vector2.zero;
+            return;
         }
-
         Move();
-        TryChangeDirection();
+        TryChangeDirection();        
     }
 
     void Move()
@@ -48,9 +49,12 @@ public class BlinkyController : MonoBehaviour
 
     void TryChangeDirection()
     {
+        if (playerObj == null)
+        {
+            return;
+        }
         if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
         {
-            Debug.Log("Giro");
             List<Vector2> dirs = GetAvailableDirection();
 
             Vector2 target = playerObj.transform.position;
@@ -112,9 +116,12 @@ public class BlinkyController : MonoBehaviour
     {
         if (collision.CompareTag("Nodo"))
         {
-            Debug.Log("Entra Colision");
             estaNodo = true;
             giroNodoFlag = false;
+            return;
+        }
+        if (collision.CompareTag("Player"))
+        {
             return;
         }
     }
@@ -122,7 +129,6 @@ public class BlinkyController : MonoBehaviour
     {
         if (collision.CompareTag("Nodo"))
         {
-            Debug.Log("Sale Colision");
             estaNodo = false;
             giroNodoFlag = false;
             return;
@@ -155,5 +161,22 @@ public class BlinkyController : MonoBehaviour
     void BuscarPlayer()
     {
         playerObj = GameObject.FindGameObjectWithTag("Player");
+    }
+    void SnapToTileCenter()
+    {
+        float cx = Mathf.Floor(transform.position.x) + 0.5f;
+        float cy = Mathf.Floor(transform.position.y) + 0.5f;
+
+        transform.position = new Vector3(cx, cy, 0);
+    }
+
+    void UpdateUltimaCasillaSegura()
+    {
+        if (IsAtCenterOfTile() && CanMove(currentDirection))
+        {
+            float cx = Mathf.Floor(transform.position.x) + 0.5f;
+            float cy = Mathf.Floor(transform.position.y) + 0.5f;
+            ultimaCasillaSegura = new Vector2(cx, cy);
+        }
     }
 }

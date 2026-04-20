@@ -5,8 +5,11 @@ using System.Collections;
 
 public class PacMan_Controller : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] LayerMask capaPared;
+    [SerializeField]
+    float speed;
+
+    [SerializeField]
+    LayerMask capaPared;
 
     private Vector2 desiredDirection;
     private Vector2 currentDirection = Vector2.right;
@@ -16,10 +19,12 @@ public class PacMan_Controller : MonoBehaviour
     private bool isDead = false;
 
     private Animator animator;
+    private Collider2D colider;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        colider = GetComponent<Collider2D>();
     }
 
     public void OnMove(InputValue value)
@@ -125,17 +130,22 @@ public class PacMan_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDead)
+        {
+            return;
+        }
+
         if (collision.CompareTag("Nodo"))
         {
             estaNodo = true;
             giroNodoFlag = false;
         }
-        else if (collision.CompareTag("Enemy"))
+        else if (collision.CompareTag("Enemy") && !isDead)
         {
             isDead = true;
+            colider.enabled = false;
             transform.rotation = Quaternion.Euler(0, 0, 0);
             animator.SetBool("isDead", true);
-
             StartCoroutine(DeathSequence());
         }
     }
@@ -152,6 +162,7 @@ public class PacMan_Controller : MonoBehaviour
     private IEnumerator DeathSequence()
     {
         yield return new WaitForSeconds(0.9f);
-        GameManager.instance.KillPacman(gameObject);
+        GameManager.instance.PacmanDied();
+        Destroy(gameObject);
     }
 }

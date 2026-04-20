@@ -16,6 +16,9 @@ public class BordeSalida : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        collision.gameObject.GetComponent<BlinkyController>().DeactivateDirectionLR(izquierda);
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<BlinkyController>().DeactivateDirectionLR(izquierda);
+        }
     }
 }

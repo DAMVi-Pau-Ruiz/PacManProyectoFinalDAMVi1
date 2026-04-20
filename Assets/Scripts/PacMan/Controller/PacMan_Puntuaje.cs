@@ -8,6 +8,6 @@ public class PacMan_Puntuaje : MonoBehaviour
     public void addPuntos(int puntosConseguidos)
     {
         puntosTotales += puntosConseguidos;
-        Debug.Log(puntosTotales);
+        HUDController.instance.AddScore(puntosConseguidos);
     }
 }
