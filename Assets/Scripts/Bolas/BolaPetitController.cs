@@ -6,7 +6,7 @@ using UnityEngine;
 public class BolaPetitController : MonoBehaviour
 {
     [SerializeField]
-    int puntos = 200;
+    int puntos = 10;
 
     private void Start()
     {

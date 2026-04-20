@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
-public class BlinkyController : MonoBehaviour
+public class PinkyController : MonoBehaviour
 {
     [SerializeField]
     float speed;
@@ -11,20 +9,23 @@ public class BlinkyController : MonoBehaviour
     [SerializeField]
     LayerMask capaPared;
 
+    [SerializeField]
+    int distanciaAdelante = 4;
+
     private Vector2 currentDirection = Vector2.left;
     private Rigidbody2D rgb;
     private bool estaNodo = false;
-    private bool giroNodoFlag = false;
+    private bool giroNodoFlag;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
 
-    private void Start()
+    void Start()
     {
         rgb = GetComponent<Rigidbody2D>();
         BuscarPlayer();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         playerObj = GameObject.FindGameObjectWithTag("Player");
 
@@ -36,8 +37,9 @@ public class BlinkyController : MonoBehaviour
             rgb.velocity = Vector2.zero;
             return;
         }
+
         Move();
-        TryChangeDirection();        
+        TryChangeDirection();
     }
 
     void Move()
@@ -51,11 +53,12 @@ public class BlinkyController : MonoBehaviour
         {
             return;
         }
+
         if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
         {
             List<Vector2> dirs = GetAvailableDirection();
 
-            Vector2 target = playerObj.transform.position;
+            Vector2 target = GetPinkyTargetTile();
             float bestDist = Mathf.Infinity;
             Vector2 bestDir = currentDirection;
 
@@ -73,9 +76,45 @@ public class BlinkyController : MonoBehaviour
             currentDirection = bestDir;
             giroNodoFlag = true;
         }
+
     }
 
-    bool IsAtCenterOfTile()
+    private Vector2 GetPinkyTargetTile()
+    {
+        if (playerObj == null)
+        {
+            return transform.position;
+        }
+
+        Vector2 pacPos = Snap(playerObj.transform.position);
+        Vector2 dir = GetPacmanDirection();
+
+        // Regla especial de Pinky cuando Pac-Man mira hacia arriba
+        if (dir == Vector2.up)
+            return pacPos + new Vector2(-distanciaAdelante, distanciaAdelante);
+
+        return pacPos + dir * distanciaAdelante;
+    }
+
+    private Vector2 GetPacmanDirection()
+    {
+        if (playerObj == null)
+        {
+            return Vector2.left;
+        }
+
+        PacMan_Controller pm = playerObj.GetComponent<PacMan_Controller>();
+        return pm != null ? pm.getCurrentDirection() : Vector2.left;
+    }
+
+    private Vector2 Snap(Vector2 v)
+    {
+        float cx = Mathf.Floor(v.x) + 0.5f;
+        float cy = Mathf.Floor(v.y) + 0.5f;
+        return new Vector2(cx, cy);
+    }
+
+    private bool IsAtCenterOfTile()
     {
         Vector3 pos = transform.position;
 
@@ -86,14 +125,14 @@ public class BlinkyController : MonoBehaviour
                Mathf.Abs(pos.y - cy) < 0.05f;
     }
 
-    bool CanMove(Vector2 dir)
+    private bool CanMove(Vector2 dir)
     {
         Vector2 size = new Vector2(0.3f, 0.3f);
         float distance = 0.55f;
         return !Physics2D.BoxCast(transform.position, size, 0, dir, distance, capaPared);
     }
 
-    List<Vector2> GetAvailableDirection()
+    private List<Vector2> GetAvailableDirection()
     {
         List<Vector2> dirs = new List<Vector2>();
         if (CanMove(Vector2.up)) dirs.Add(Vector2.up);
@@ -112,11 +151,8 @@ public class BlinkyController : MonoBehaviour
             giroNodoFlag = false;
             return;
         }
-        if (collision.CompareTag("Player"))
-        {
-            return;
-        }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Nodo"))

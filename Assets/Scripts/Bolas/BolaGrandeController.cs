@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BolaGrandeController : MonoBehaviour
 {
-    [SerializeField] int puntos = 1000;
+    [SerializeField] int puntos = 50;
 
     private void Start()
     {

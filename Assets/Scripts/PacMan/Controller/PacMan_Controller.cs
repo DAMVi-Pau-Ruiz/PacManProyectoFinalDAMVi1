@@ -165,4 +165,9 @@ public class PacMan_Controller : MonoBehaviour
         GameManager.instance.PacmanDied();
         Destroy(gameObject);
     }
+
+    public Vector2 getCurrentDirection()
+    {
+        return currentDirection;
+    }
 }
