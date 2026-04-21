@@ -13,8 +13,8 @@ public class GhostsSpawner : MonoBehaviour
     [SerializeField]
     GameObject inky;
 
-    //[SerializeField]
-    //GameObject clyde;
+    [SerializeField]
+    GameObject clyde;
 
     [SerializeField]
     GameObject fBlinky;
@@ -38,7 +38,7 @@ public class GhostsSpawner : MonoBehaviour
     private bool blinkySpawned = false;
     private bool pinkySpawned = false;
     private bool inkySpawned = false;
-    //private bool clydeSpawned = false;
+    private bool clydeSpawned = false;
 
     private void Update()
     {
@@ -62,12 +62,12 @@ public class GhostsSpawner : MonoBehaviour
             inkySpawned = true;
             Destroy(fInky);
         }
-        //else if (!clydeSpawned && currentTimeBetweenGhosts >= timeBetweenGhosts * 3)
-        //{
-        //    Spawn(clyde);
-        //    clydeSpawned = true;
-        //    Destroy(fClyde);
-        //}
+        else if (!clydeSpawned && currentTimeBetweenGhosts >= timeBetweenGhosts * 3)
+        {
+            Spawn(clyde);
+            clydeSpawned = true;
+            Destroy(fClyde);
+        }
     }
     private void Spawn(GameObject ghostPrefab)
     {

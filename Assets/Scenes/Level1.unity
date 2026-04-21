@@ -6152,6 +6152,7 @@ MonoBehaviour:
   blinky: {fileID: 1360311399578124702, guid: 11f45a4fb98690941a9117289617ab26, type: 3}
   pinky: {fileID: 1425064377776042445, guid: a7983d39a7a4f174c8696e33840245ec, type: 3}
   inky: {fileID: 2607035846982386041, guid: 4ef832e036dc2d44e97f317022cf49c9, type: 3}
+  clyde: {fileID: 7290475374687342706, guid: 966735eec76af4b47af203bf6f7362b9, type: 3}
   fBlinky: {fileID: 1728235399}
   fPinky: {fileID: 558885097}
   fInky: {fileID: 103828431}
