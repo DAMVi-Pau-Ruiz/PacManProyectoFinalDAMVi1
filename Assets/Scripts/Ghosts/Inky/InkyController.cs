@@ -1,16 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
-public class PinkyController : MonoBehaviour, IInvertibleDirection
+public class InkyController : MonoBehaviour, IInvertibleDirection
 {
     [SerializeField]
     float speed;
 
     [SerializeField]
     LayerMask capaPared;
-
-    [SerializeField]
-    int distanciaAdelante = 4;
 
     [SerializeField]
     Sprite lookUp;
@@ -27,25 +26,30 @@ public class PinkyController : MonoBehaviour, IInvertibleDirection
     private Vector2 currentDirection = Vector2.left;
     private Rigidbody2D rgb;
     private bool estaNodo = false;
-    private bool giroNodoFlag;
-    private GameObject playerObj;
+    private bool giroNodoFlag = false;
+    private GameObject target;
     private Vector2 ultimaCasillaSegura;
     private SpriteRenderer sr;
 
-    void Start()
+    private void Start()
     {
         rgb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        BuscarPlayer();
+        
+        float cx = Mathf.Floor(transform.position.x) + 0.5f;
+        float cy = Mathf.Floor(transform.position.y) + 0.5f;
+        transform.position = new Vector2(cx, cy);
+
+        BuscarEsquina();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        playerObj = GameObject.FindGameObjectWithTag("Player");
+            target = GameObject.FindGameObjectWithTag("Esquina");
 
         UpdateUltimaCasillaSegura();
 
-        if (playerObj == null)
+        if (target == null)
         {
             transform.position = ultimaCasillaSegura;
             rgb.velocity = Vector2.zero;
@@ -56,30 +60,29 @@ public class PinkyController : MonoBehaviour, IInvertibleDirection
         TryChangeDirection();
     }
 
-    void Move()
+    private void Move()
     {
         rgb.MovePosition(rgb.position + currentDirection * speed * Time.fixedDeltaTime);
     }
 
-    void TryChangeDirection()
+    private void TryChangeDirection()
     {
-        if (playerObj == null)
+        if (target == null)
         {
             return;
         }
-
         if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
         {
             List<Vector2> dirs = GetAvailableDirection();
 
-            Vector2 target = GetPinkyTargetTile();
+            Vector2 targetPos = target.transform.position;
             float bestDist = Mathf.Infinity;
             Vector2 bestDir = currentDirection;
 
             foreach (var dir in dirs)
             {
                 Vector2 nextPos = (Vector2)transform.position + dir;
-                float dist = Vector2.Distance(nextPos, target);
+                float dist = Vector2.Distance(nextPos, targetPos);
 
                 if (dist < bestDist)
                 {
@@ -90,42 +93,6 @@ public class PinkyController : MonoBehaviour, IInvertibleDirection
             currentDirection = bestDir;
             giroNodoFlag = true;
         }
-
-    }
-
-    private Vector2 GetPinkyTargetTile()
-    {
-        if (playerObj == null)
-        {
-            return transform.position;
-        }
-
-        Vector2 pacPos = Snap(playerObj.transform.position);
-        Vector2 dir = GetPacmanDirection();
-
-        // Regla especial de Pinky cuando Pac-Man mira hacia arriba
-        if (dir == Vector2.up)
-            return pacPos + new Vector2(-distanciaAdelante, distanciaAdelante);
-
-        return pacPos + dir * distanciaAdelante;
-    }
-
-    private Vector2 GetPacmanDirection()
-    {
-        if (playerObj == null)
-        {
-            return Vector2.left;
-        }
-
-        PacMan_Controller pm = playerObj.GetComponent<PacMan_Controller>();
-        return pm != null ? pm.getCurrentDirection() : Vector2.left;
-    }
-
-    private Vector2 Snap(Vector2 v)
-    {
-        float cx = Mathf.Floor(v.x) + 0.5f;
-        float cy = Mathf.Floor(v.y) + 0.5f;
-        return new Vector2(cx, cy);
     }
 
     private bool IsAtCenterOfTile()
@@ -136,7 +103,7 @@ public class PinkyController : MonoBehaviour, IInvertibleDirection
         float cy = Mathf.Floor(pos.y) + 0.5f;
 
         return Mathf.Abs(pos.x - cx) < 0.05f &&
-               Mathf.Abs(pos.y - cy) < 0.05f;
+            Mathf.Abs(pos.y - cy) < 0.05f;
     }
 
     private bool CanMove(Vector2 dir)
@@ -165,6 +132,10 @@ public class PinkyController : MonoBehaviour, IInvertibleDirection
             giroNodoFlag = false;
             return;
         }
+        if (collision.CompareTag("Esquina"))
+        {
+            return;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -177,9 +148,9 @@ public class PinkyController : MonoBehaviour, IInvertibleDirection
         }
     }
 
-    private void BuscarPlayer()
+    private void BuscarEsquina()
     {
-        playerObj = GameObject.FindGameObjectWithTag("Player");
+        target = GameObject.FindGameObjectWithTag("Esquina");
     }
 
     private void UpdateUltimaCasillaSegura()
@@ -191,6 +162,7 @@ public class PinkyController : MonoBehaviour, IInvertibleDirection
             ultimaCasillaSegura = new Vector2(cx, cy);
         }
     }
+
     private void UpdateSprite()
     {
         if (currentDirection == Vector2.up)
@@ -210,6 +182,7 @@ public class PinkyController : MonoBehaviour, IInvertibleDirection
             sr.sprite = lookRight;
         }
     }
+
     public void InvertDirection()
     {
         currentDirection = -currentDirection;

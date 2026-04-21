@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
-public class BlinkyController : MonoBehaviour
+public class BlinkyController : MonoBehaviour, IInvertibleDirection
 {
     [SerializeField]
     float speed;
@@ -127,10 +127,6 @@ public class BlinkyController : MonoBehaviour
             giroNodoFlag = false;
             return;
         }
-        if (collision.CompareTag("Player"))
-        {
-            return;
-        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -162,7 +158,8 @@ public class BlinkyController : MonoBehaviour
         if (currentDirection == Vector2.up)
         {
             sr.sprite = lookUp;
-        }else if (currentDirection == Vector2.left)
+        }
+        else if (currentDirection == Vector2.left)
         {
             sr.sprite = lookLeft;
         }
@@ -174,5 +171,10 @@ public class BlinkyController : MonoBehaviour
         {
             sr.sprite = lookRight;
         }
+    }
+
+    public void InvertDirection()
+    {
+        currentDirection = -currentDirection;
     }
 }

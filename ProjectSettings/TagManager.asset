@@ -9,6 +9,7 @@ TagManager:
   - BolasPetit
   - BolasGrandes
   - Enemy
+  - Esquina
   layers:
   - Default
   - TransparentFX
