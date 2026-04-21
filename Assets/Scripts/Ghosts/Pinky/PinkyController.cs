@@ -12,16 +12,30 @@ public class PinkyController : MonoBehaviour
     [SerializeField]
     int distanciaAdelante = 4;
 
+    [SerializeField]
+    Sprite lookUp;
+
+    [SerializeField]
+    Sprite lookLeft;
+
+    [SerializeField]
+    Sprite lookDown;
+
+    [SerializeField]
+    Sprite lookRight;
+
     private Vector2 currentDirection = Vector2.left;
     private Rigidbody2D rgb;
     private bool estaNodo = false;
     private bool giroNodoFlag;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
+    private SpriteRenderer sr;
 
     void Start()
     {
         rgb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         BuscarPlayer();
     }
 
@@ -37,8 +51,8 @@ public class PinkyController : MonoBehaviour
             rgb.velocity = Vector2.zero;
             return;
         }
-
         Move();
+        UpdateSprite();
         TryChangeDirection();
     }
 
@@ -175,6 +189,25 @@ public class PinkyController : MonoBehaviour
             float cx = Mathf.Floor(transform.position.x) + 0.5f;
             float cy = Mathf.Floor(transform.position.y) + 0.5f;
             ultimaCasillaSegura = new Vector2(cx, cy);
+        }
+    }
+    private void UpdateSprite()
+    {
+        if (currentDirection == Vector2.up)
+        {
+            sr.sprite = lookUp;
+        }
+        else if (currentDirection == Vector2.left)
+        {
+            sr.sprite = lookLeft;
+        }
+        else if (currentDirection == Vector2.down)
+        {
+            sr.sprite = lookDown;
+        }
+        else if (currentDirection == Vector2.right)
+        {
+            sr.sprite = lookRight;
         }
     }
 }

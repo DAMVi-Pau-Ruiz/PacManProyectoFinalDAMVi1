@@ -11,16 +11,30 @@ public class BlinkyController : MonoBehaviour
     [SerializeField]
     LayerMask capaPared;
 
+    [SerializeField]
+    Sprite lookUp;
+
+    [SerializeField]
+    Sprite lookLeft;
+
+    [SerializeField]
+    Sprite lookDown;
+
+    [SerializeField]
+    Sprite lookRight;
+
     private Vector2 currentDirection = Vector2.left;
     private Rigidbody2D rgb;
     private bool estaNodo = false;
     private bool giroNodoFlag = false;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
+    private SpriteRenderer sr;
 
     private void Start()
     {
         rgb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         BuscarPlayer();
     }
 
@@ -37,6 +51,7 @@ public class BlinkyController : MonoBehaviour
             return;
         }
         Move();
+        UpdateSprite();
         TryChangeDirection();        
     }
 
@@ -139,6 +154,25 @@ public class BlinkyController : MonoBehaviour
             float cx = Mathf.Floor(transform.position.x) + 0.5f;
             float cy = Mathf.Floor(transform.position.y) + 0.5f;
             ultimaCasillaSegura = new Vector2(cx, cy);
+        }
+    }
+
+    private void UpdateSprite()
+    {
+        if (currentDirection == Vector2.up)
+        {
+            sr.sprite = lookUp;
+        }else if (currentDirection == Vector2.left)
+        {
+            sr.sprite = lookLeft;
+        }
+        else if (currentDirection == Vector2.down)
+        {
+            sr.sprite = lookDown;
+        }
+        else if (currentDirection == Vector2.right)
+        {
+            sr.sprite = lookRight;
         }
     }
 }
