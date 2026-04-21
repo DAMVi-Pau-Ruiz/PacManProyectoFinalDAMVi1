@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-
 public class PacMan_Controller : MonoBehaviour
 {
     [SerializeField]
@@ -51,13 +50,13 @@ public class PacMan_Controller : MonoBehaviour
         {
             Vector2 pos = transform.position;
 
-            // ?? bloqueo frontal
+            // bloqueo frontal
             if (IsBlocked(currentDirection))
             {
                 currentDirection = Vector2.zero;
             }
 
-            // ?? auto-alineado suave (clave para quitar tirones)
+            // auto-alineado suave
             float cx = Mathf.Floor(pos.x) + 0.5f;
             float cy = Mathf.Floor(pos.y) + 0.5f;
 
@@ -72,7 +71,6 @@ public class PacMan_Controller : MonoBehaviour
                 pos.x = Mathf.Lerp(pos.x, cx, alignSpeed * Time.deltaTime);
             }
 
-            // ?? movimiento principal
             pos += currentDirection * speed * Time.deltaTime;
 
             transform.position = pos;
@@ -83,7 +81,7 @@ public class PacMan_Controller : MonoBehaviour
 
     void TryChangeDirection()
     {
-        // ?? salir de idle
+        // salir de idle
         if (currentDirection == Vector2.zero && desiredDirection != Vector2.zero)
         {
             if (!IsBlocked(desiredDirection))
@@ -94,7 +92,7 @@ public class PacMan_Controller : MonoBehaviour
             }
         }
 
-        // ?? giro 180° siempre permitido
+        // giro 180°
         if (desiredDirection == -currentDirection && desiredDirection != Vector2.zero)
         {
             currentDirection = desiredDirection;
@@ -102,7 +100,7 @@ public class PacMan_Controller : MonoBehaviour
             return;
         }
 
-        // ?? giros normales solo en nodo
+        // giros normales solo en nodo
         if (!estaNodo || giroNodoFlag)
             return;
 
@@ -131,9 +129,7 @@ public class PacMan_Controller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDead)
-        {
             return;
-        }
 
         if (collision.CompareTag("Nodo"))
         {
@@ -142,11 +138,20 @@ public class PacMan_Controller : MonoBehaviour
         }
         else if (collision.CompareTag("Enemy") && !isDead)
         {
-            isDead = true;
-            colider.enabled = false;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            animator.SetBool("isDead", true);
-            StartCoroutine(DeathSequence());
+            if (!GameManager.instance.IsModoDiabloActivo())
+            {
+                isDead = true;
+                colider.enabled = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                animator.SetBool("isDead", true);
+                StartCoroutine(DeathSequence());
+            }
+            else
+            {
+                string ghostName = collision.gameObject.name;
+                Destroy(collision.gameObject);
+                GameObject.FindObjectOfType<GhostsSpawner>().MarkGhostAsEaten(ghostName);
+            }
         }
     }
 

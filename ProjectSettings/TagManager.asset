@@ -10,6 +10,7 @@ TagManager:
   - BolasGrandes
   - Enemy
   - Esquina
+  - GhostSpawn
   layers:
   - Default
   - TransparentFX

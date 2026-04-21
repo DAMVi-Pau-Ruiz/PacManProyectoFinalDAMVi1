@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class BolaGrandeController : MonoBehaviour
 {
-    [SerializeField] int puntos = 50;
+    [SerializeField]
+    int puntos = 50;
+
+    [SerializeField]
+    float duracionModoDiablo = 8;
 
     private void Start()
     {
@@ -17,6 +21,8 @@ public class BolaGrandeController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PacMan_Puntuaje>().addPuntos(puntos);
+
+            GameManager.instance.ModoDiabloActivado(duracionModoDiablo);
 
             BolasManager.Instance.PelletEaten();
 
