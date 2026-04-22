@@ -24,10 +24,14 @@ public class MainMenuManager : MonoBehaviour
 #endif
 
     }
-
     public void CreditLevel()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public void OptionLevel()
+    {
+        SceneManager.LoadScene("Options");
     }
     
 }
