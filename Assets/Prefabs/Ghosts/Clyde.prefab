@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2c5287dd974704d98be55b192c8e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puntos: 200
+  scaredSprite: {fileID: -2142475807, guid: 7bc2677c0c3103c4aa040c0429fa8cbc, type: 3}
   speed: 1.5
   capaPared:
     serializedVersion: 2

@@ -6,19 +6,25 @@ public class GhostsSpawner : MonoBehaviour
 {
     [SerializeField]
     GameObject blinky;
+
     [SerializeField]
     GameObject pinky;
+
     [SerializeField]
     GameObject inky;
+
     [SerializeField]
     GameObject clyde;
 
     [SerializeField]
     GameObject fBlinky;
+
     [SerializeField]
     GameObject fPinky;
+
     [SerializeField]
     GameObject fInky;
+
     [SerializeField]
     GameObject fClyde;
 
@@ -27,6 +33,7 @@ public class GhostsSpawner : MonoBehaviour
 
     [SerializeField]
     float timeBetweenGhosts = 10;
+
     [SerializeField]
     float respawnTime = 5f;  // Tiempo de reaparición de los fantasmas (en segundos)
 

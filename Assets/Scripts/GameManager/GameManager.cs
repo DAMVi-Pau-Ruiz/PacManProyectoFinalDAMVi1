@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     private int vidasActuales;
     private bool modoDiabloActivo = false;
     private Coroutine modoDiabloCoroutine;
-
     public GameObject currentPacman;
+    private Coroutine invisGhostsCoroutine;
 
     private void Awake()
     {
@@ -68,5 +68,36 @@ public class GameManager : MonoBehaviour
     public Transform GetPacman()
     {
         return currentPacman != null ? currentPacman.transform : null;
+    }
+
+    public void AddVida()
+    {
+        if (!(vidasActuales + 1 > 10))
+        {
+            vidasActuales++;
+            LivesController.instance.UpdateLives(vidasActuales);
+        }
+    }
+
+    public void ActivarInvisibilidadFantasmas(float duracion)
+    {
+        if (invisGhostsCoroutine != null)
+            StopCoroutine(invisGhostsCoroutine);
+
+        invisGhostsCoroutine = StartCoroutine(InvisibilidadFantasmasRutina(duracion));
+    }
+
+    private IEnumerator InvisibilidadFantasmasRutina(float duracion)
+    {
+        GhostsController[] ghosts = FindObjectsOfType<GhostsController>();
+
+        foreach (var g in ghosts)
+            g.SetInvisible(true);
+
+        yield return new WaitForSeconds(duracion);
+
+        ghosts = FindObjectsOfType<GhostsController>();
+        foreach (var g in ghosts)
+            g.SetInvisible(false);
     }
 }

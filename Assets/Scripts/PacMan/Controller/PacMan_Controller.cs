@@ -16,14 +16,20 @@ public class PacMan_Controller : MonoBehaviour
     private bool estaNodo = false;
     private bool giroNodoFlag = false;
     private bool isDead = false;
-
     private Animator animator;
     private Collider2D colider;
+    private float baseSpeed;
+    private Coroutine speedBoostCoroutine;
+    private Coroutine invincibleCoroutine;
+    private bool invincible = false;
+    private int invertMove = 1;
+    private Coroutine invertCoroutine;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         colider = GetComponent<Collider2D>();
+        baseSpeed = speed;
     }
 
     public void OnMove(InputValue value)
@@ -35,7 +41,7 @@ public class PacMan_Controller : MonoBehaviour
             input.y = 0;
 
         if (input != Vector2.zero)
-            desiredDirection = input;
+            desiredDirection = input * invertMove;
     }
 
     private void Update()
@@ -138,7 +144,7 @@ public class PacMan_Controller : MonoBehaviour
         }
         else if (collision.CompareTag("Enemy") && !isDead)
         {
-            if (!GameManager.instance.IsModoDiabloActivo())
+            if (!GameManager.instance.IsModoDiabloActivo() && !invincible)
             {
                 isDead = true;
                 colider.enabled = false;
@@ -146,11 +152,12 @@ public class PacMan_Controller : MonoBehaviour
                 animator.SetBool("isDead", true);
                 StartCoroutine(DeathSequence());
             }
-            else
+            else if (GameManager.instance.IsModoDiabloActivo())
             {
                 string ghostName = collision.gameObject.name;
                 Destroy(collision.gameObject);
                 GameObject.FindObjectOfType<GhostsSpawner>().MarkGhostAsEaten(ghostName);
+                gameObject.GetComponent<PacMan_Puntuaje>().addPuntos(collision.GetComponent<GhostsController>().GetPuntos());
             }
         }
     }
@@ -174,5 +181,58 @@ public class PacMan_Controller : MonoBehaviour
     public Vector2 getCurrentDirection()
     {
         return currentDirection;
+    }
+
+    public void ActivarSpeedBoost(float multiplicador, float duracion)
+    {
+        if (speedBoostCoroutine != null)
+            StopCoroutine(speedBoostCoroutine);
+
+        speedBoostCoroutine = StartCoroutine(SpeedBoostRutina(multiplicador, duracion));
+    }
+
+    private IEnumerator SpeedBoostRutina(float multiplicador, float duracion)
+    {
+        speed = baseSpeed * multiplicador;
+
+        yield return new WaitForSeconds(duracion);
+
+        speed = baseSpeed;
+    }
+
+    public void ActivarInvincible(float duracion)
+    {
+        if (invincibleCoroutine != null)
+            StopCoroutine(invincibleCoroutine);
+
+        invincibleCoroutine = StartCoroutine(InvincibleRutina(duracion));
+    }
+
+    private IEnumerator InvincibleRutina(float duracion)
+    {
+        invincible = true;
+
+        yield return new WaitForSeconds(duracion);
+
+        invincible = false;
+    }
+
+    public void ActivarInvertido(float duracion)
+    {
+        if (invertCoroutine != null)
+            StopCoroutine(invertCoroutine);
+
+        invertCoroutine = StartCoroutine(InvertidoRutina(duracion));
+    }
+
+    private IEnumerator InvertidoRutina(float duracion)
+    {
+        invertMove = -1;
+        animator.SetBool("isInvert", true);
+
+        yield return new WaitForSeconds(duracion);
+
+        animator.SetBool("isInvert", false);
+        invertMove = 1;
     }
 }

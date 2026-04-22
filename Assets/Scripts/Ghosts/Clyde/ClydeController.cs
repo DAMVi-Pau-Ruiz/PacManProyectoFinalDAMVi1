@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClydeController : MonoBehaviour, IInvertibleDirection
+public class ClydeController : GhostsController, IInvertibleDirection
 {
     [SerializeField]
     float speed;
@@ -68,6 +68,17 @@ public class ClydeController : MonoBehaviour, IInvertibleDirection
         if (playerObj == null)
         {
             return;
+        }
+
+        if (GameManager.instance.IsModoDiabloActivo())
+        {
+            if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
+            {
+                List<Vector2> dirs = GetAvailableDirection();
+                currentDirection = GetRandomDirection(dirs);
+                giroNodoFlag = true;
+            }
+            return; // Evita ejecutar el comportamiento normal
         }
 
         if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
@@ -182,21 +193,28 @@ public class ClydeController : MonoBehaviour, IInvertibleDirection
 
     private void UpdateSprite()
     {
-        if (currentDirection == Vector2.up)
+        if (!GameManager.instance.IsModoDiabloActivo())
         {
-            sr.sprite = lookUp;
+            if (currentDirection == Vector2.up)
+            {
+                sr.sprite = lookUp;
+            }
+            else if (currentDirection == Vector2.left)
+            {
+                sr.sprite = lookLeft;
+            }
+            else if (currentDirection == Vector2.down)
+            {
+                sr.sprite = lookDown;
+            }
+            else if (currentDirection == Vector2.right)
+            {
+                sr.sprite = lookRight;
+            }
         }
-        else if (currentDirection == Vector2.left)
+        else
         {
-            sr.sprite = lookLeft;
-        }
-        else if (currentDirection == Vector2.down)
-        {
-            sr.sprite = lookDown;
-        }
-        else if (currentDirection == Vector2.right)
-        {
-            sr.sprite = lookRight;
+            sr.sprite = scaredSprite;
         }
     }
 

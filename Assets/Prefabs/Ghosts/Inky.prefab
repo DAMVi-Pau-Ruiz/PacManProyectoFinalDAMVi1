@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6034623868152928409}
   - component: {fileID: 4236000784565715436}
   - component: {fileID: 1819069031684268189}
-  - component: {fileID: 5617031802954634745}
   - component: {fileID: 330544816844143700}
   - component: {fileID: 4061124290053323467}
   - component: {fileID: 2372733938268167879}
@@ -101,6 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43fa8bece05bef43bf21ea9acfc9f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puntos: 200
+  scaredSprite: {fileID: 1541118644, guid: 6c13294f721d9574e9a17596cef7e883, type: 3}
   speed: 1.5
   capaPared:
     serializedVersion: 2
@@ -109,19 +110,6 @@ MonoBehaviour:
   lookLeft: {fileID: 655234332, guid: 6c13294f721d9574e9a17596cef7e883, type: 3}
   lookDown: {fileID: 714162048, guid: 6c13294f721d9574e9a17596cef7e883, type: 3}
   lookRight: {fileID: -1146360475, guid: 6c13294f721d9574e9a17596cef7e883, type: 3}
---- !u!114 &5617031802954634745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2607035846982386041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8995bbadc914f4d82ae125547545d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  puntos: 200
 --- !u!50 &330544816844143700
 Rigidbody2D:
   serializedVersion: 4
