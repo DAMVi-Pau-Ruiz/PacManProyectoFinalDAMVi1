@@ -5,8 +5,8 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class InkyController : GhostsController, IInvertibleDirection
 {
-    [SerializeField]
-    float speed;
+    /*[SerializeField]
+    float speed;*/
 
     [SerializeField]
     LayerMask capaPared;
@@ -31,11 +31,14 @@ public class InkyController : GhostsController, IInvertibleDirection
     private Vector2 ultimaCasillaSegura;
     private SpriteRenderer sr;
 
-    private void Start()
+
+    protected override void Start()
     {
+        base.Start(); // <- IMPORTANTE
+
         rgb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        
+
         float cx = Mathf.Floor(transform.position.x) + 0.5f;
         float cy = Mathf.Floor(transform.position.y) + 0.5f;
         transform.position = new Vector2(cx, cy);

@@ -4,8 +4,8 @@ using System.Collections;
 
 public class PacMan_Controller : MonoBehaviour
 {
-    [SerializeField]
-    float speed;
+    
+    private float speed;
 
     [SerializeField]
     LayerMask capaPared;
@@ -29,8 +29,10 @@ public class PacMan_Controller : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         colider = GetComponent<Collider2D>();
-        baseSpeed = speed;
+        baseSpeed = GameManager.instance.GetPacmanSpeed();
+        speed = baseSpeed;
     }
+
 
     public void OnMove(InputValue value)
     {

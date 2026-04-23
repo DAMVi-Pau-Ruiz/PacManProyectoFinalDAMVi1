@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 8967a56f97ada3c43b332a3ce1c765a8
+  - enabled: 1
+    path: Assets/Scenes/Levels/SelectDifficulty/DifficultyTypes.unity
+    guid: 8e1290fadf3d86a4bbc133510c06685e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 88a6f22bd915b4645ab9764ccf84a901, type: 2}

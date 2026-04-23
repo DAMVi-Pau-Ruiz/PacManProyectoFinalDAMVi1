@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PinkyController : GhostsController, IInvertibleDirection
 {
-    [SerializeField]
-    float speed;
+    /*[SerializeField]
+    float speed;*/
 
     [SerializeField]
     LayerMask capaPared;
@@ -32,8 +32,11 @@ public class PinkyController : GhostsController, IInvertibleDirection
     private Vector2 ultimaCasillaSegura;
     private SpriteRenderer sr;
 
-    void Start()
+
+    protected override void Start()
     {
+        base.Start(); // <- IMPORTANTE
+
         rgb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         BuscarPlayer();

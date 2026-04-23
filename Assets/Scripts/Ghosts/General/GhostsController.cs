@@ -12,6 +12,13 @@ public class GhostsController : MonoBehaviour
  
     private SpriteRenderer sr;
     private bool isInvisible = false;
+    protected float speed;
+
+    protected virtual void Start()
+    {
+        speed = GameManager.instance.GetGhostSpeed();
+    }
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();

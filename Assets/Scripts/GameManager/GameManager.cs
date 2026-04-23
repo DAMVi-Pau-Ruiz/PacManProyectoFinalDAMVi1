@@ -20,13 +20,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
     {
         vidasActuales = vidasIniciales;
         LivesController.instance.UpdateLives(vidasActuales);
+        Debug.Log("Dificultad actual: " + instance.currentDifficulty);
     }
 
     public void PacmanDied()
@@ -117,4 +126,66 @@ public class GameManager : MonoBehaviour
     {
         return scoreActual;
     }
+
+    /* MAQUINA ESTADOS DIFICULTADES */
+    public enum Difficulty
+    {
+        Easy,
+        Normal,
+        Hard
+    }
+
+    public Difficulty currentDifficulty;
+    public void SetEasy()
+    {
+        currentDifficulty = Difficulty.Easy;
+    }
+
+    public void SetNormal()
+    {
+        currentDifficulty = Difficulty.Normal;
+    }
+
+    public void SetHard()
+    {
+        currentDifficulty = Difficulty.Hard;
+    }
+
+    /*VALOR VELOCIDAD FANTASMAS DEPENDIENDO DE DIFICULTAD*/
+
+    public float GetGhostSpeed()
+    {
+        switch (currentDifficulty)
+        {
+            case Difficulty.Easy:
+                return 1.5f;
+
+            case Difficulty.Normal:
+                return 2f;
+
+            case Difficulty.Hard:
+                return 2.5f;
+        }
+
+        return 3f;
+    }
+
+    /*VALOR VELOCIDAD PACMAN DEPENDIENDO DE DIFICULTAD*/
+    public float GetPacmanSpeed()
+    {
+        switch (currentDifficulty)
+        {
+            case Difficulty.Easy:
+                return 3f;
+
+            case Difficulty.Normal:
+                return 3f;
+
+            case Difficulty.Hard:
+                return 2f;
+        }
+
+        return 5f;
+    }
+
 }
