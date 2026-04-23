@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     private Coroutine modoDiabloCoroutine;
     public GameObject currentPacman;
     private Coroutine invisGhostsCoroutine;
+    private int scoreActual;
 
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
         if (vidasActuales > 0)
             StartCoroutine(RespawnPacman());
         else
-            Debug.Log("Has perdido");
+            SceneManager.LoadScene("GameOver");
     }
 
     private IEnumerator RespawnPacman()
@@ -99,5 +101,20 @@ public class GameManager : MonoBehaviour
         ghosts = FindObjectsOfType<GhostsController>();
         foreach (var g in ghosts)
             g.SetInvisible(false);
+    }
+
+    public void AddScore(int puntos)
+    {
+        scoreActual += puntos;
+    }
+
+    public void ResetScore()
+    {
+        scoreActual = 0;
+    }
+
+    public int getScoreActual()
+    {
+        return scoreActual;
     }
 }
