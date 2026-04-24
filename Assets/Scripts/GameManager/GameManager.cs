@@ -18,24 +18,25 @@ public class GameManager : MonoBehaviour
     private Coroutine invisGhostsCoroutine;
     private int scoreActual;
 
+    public enum Difficulty { Easy, Normal, Hard }
+    public Difficulty currentDifficulty = Difficulty.Normal;
+
     private void Awake()
     {
-        if (instance == null)
+        instance = this;
+
+        if (PlayerPrefs.HasKey("difficulty"))
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            currentDifficulty = (Difficulty)PlayerPrefs.GetInt("difficulty");
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+        AplicarDificultad();
     }
 
     private void Start()
     {
         vidasActuales = vidasIniciales;
         LivesController.instance.UpdateLives(vidasActuales);
-        Debug.Log("Dificultad actual: " + instance.currentDifficulty);
     }
 
     public void PacmanDied()
@@ -117,75 +118,29 @@ public class GameManager : MonoBehaviour
         scoreActual += puntos;
     }
 
-    public void ResetScore()
-    {
-        scoreActual = 0;
-    }
-
     public int getScoreActual()
     {
         return scoreActual;
     }
 
-    /* MAQUINA ESTADOS DIFICULTADES */
-    public enum Difficulty
+    public void ResetScore()
     {
-        Easy,
-        Normal,
-        Hard
+        scoreActual = 0;
     }
 
-    public Difficulty currentDifficulty;
-    public void SetEasy()
-    {
-        currentDifficulty = Difficulty.Easy;
-    }
-
-    public void SetNormal()
-    {
-        currentDifficulty = Difficulty.Normal;
-    }
-
-    public void SetHard()
-    {
-        currentDifficulty = Difficulty.Hard;
-    }
-
-    /*VALOR VELOCIDAD FANTASMAS DEPENDIENDO DE DIFICULTAD*/
-
-    public float GetGhostSpeed()
+    private void AplicarDificultad()
     {
         switch (currentDifficulty)
         {
             case Difficulty.Easy:
-                return 1.5f;
-
+                vidasIniciales = 3;
+                break;
             case Difficulty.Normal:
-                return 2f;
-
+                vidasIniciales = 2;
+                break;
             case Difficulty.Hard:
-                return 2.5f;
+                vidasIniciales = 1;
+                break;
         }
-
-        return 3f;
     }
-
-    /*VALOR VELOCIDAD PACMAN DEPENDIENDO DE DIFICULTAD*/
-    public float GetPacmanSpeed()
-    {
-        switch (currentDifficulty)
-        {
-            case Difficulty.Easy:
-                return 3f;
-
-            case Difficulty.Normal:
-                return 3f;
-
-            case Difficulty.Hard:
-                return 2f;
-        }
-
-        return 5f;
-    }
-
 }

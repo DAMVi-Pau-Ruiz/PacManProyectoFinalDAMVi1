@@ -5,8 +5,8 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class BlinkyController : GhostsController, IInvertibleDirection
 {
-    /*[SerializeField]
-    float speed;*/
+    [SerializeField]
+    float speed;
 
     [SerializeField]
     LayerMask capaPared;
@@ -29,12 +29,11 @@ public class BlinkyController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag = false;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
-    private SpriteRenderer sr;
 
 
-    protected override void Start()
+
+    void Start()
     {
-        base.Start(); // <- IMPORTANTE
 
         rgb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();

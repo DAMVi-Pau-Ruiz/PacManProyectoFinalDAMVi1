@@ -10,14 +10,10 @@ public class GhostsController : MonoBehaviour
     [SerializeField]
     protected Sprite scaredSprite;
  
-    private SpriteRenderer sr;
+    protected SpriteRenderer sr;
     private bool isInvisible = false;
-    protected float speed;
 
-    protected virtual void Start()
-    {
-        speed = GameManager.instance.GetGhostSpeed();
-    }
+
 
     private void Awake()
     {

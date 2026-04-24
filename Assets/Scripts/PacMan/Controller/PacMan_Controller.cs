@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PacMan_Controller : MonoBehaviour
 {
-    
-    private float speed;
+    [SerializeField]
+    float speed;
 
     [SerializeField]
     LayerMask capaPared;
@@ -29,10 +30,8 @@ public class PacMan_Controller : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         colider = GetComponent<Collider2D>();
-        baseSpeed = GameManager.instance.GetPacmanSpeed();
-        speed = baseSpeed;
+        baseSpeed = speed;
     }
-
 
     public void OnMove(InputValue value)
     {
@@ -178,6 +177,7 @@ public class PacMan_Controller : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         GameManager.instance.PacmanDied();
         Destroy(gameObject);
+        
     }
 
     public Vector2 getCurrentDirection()

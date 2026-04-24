@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,19 +5,19 @@ public class DifficultyManager : MonoBehaviour
 {
     public void SetEasy()
     {
-        GameManager.instance.SetEasy();
+        PlayerPrefs.SetInt("difficulty", (int)GameManager.Difficulty.Easy);
         SceneManager.LoadScene("Level1");
     }
 
     public void SetNormal()
     {
-        GameManager.instance.SetNormal();
+        PlayerPrefs.SetInt("difficulty", (int)GameManager.Difficulty.Normal);
         SceneManager.LoadScene("Level1");
     }
 
     public void SetHard()
     {
-        GameManager.instance.SetHard();
+        PlayerPrefs.SetInt("difficulty", (int)GameManager.Difficulty.Hard);
         SceneManager.LoadScene("Level1");
     }
 }
