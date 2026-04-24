@@ -20,4 +20,9 @@ public class DifficultyManager : MonoBehaviour
         PlayerPrefs.SetInt("difficulty", (int)GameManager.Difficulty.Hard);
         SceneManager.LoadScene("Level1");
     }
+
+    public void GetBack()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
