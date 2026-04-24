@@ -31,7 +31,6 @@ public class ClydeController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag = false;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
-    private SpriteRenderer sr;
 
     private void Start()
     {

@@ -10,7 +10,7 @@ public class GhostsController : MonoBehaviour
     [SerializeField]
     protected Sprite scaredSprite;
  
-    private SpriteRenderer sr;
+    protected SpriteRenderer sr;
     private bool isInvisible = false;
     private void Awake()
     {

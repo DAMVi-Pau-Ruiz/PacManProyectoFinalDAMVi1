@@ -30,7 +30,6 @@ public class PinkyController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
-    private SpriteRenderer sr;
 
     void Start()
     {

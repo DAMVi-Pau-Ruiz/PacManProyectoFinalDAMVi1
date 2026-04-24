@@ -29,7 +29,6 @@ public class InkyController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag = false;
     private GameObject target;
     private Vector2 ultimaCasillaSegura;
-    private SpriteRenderer sr;
 
     private void Start()
     {
