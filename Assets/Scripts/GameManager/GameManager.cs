@@ -47,7 +47,10 @@ public class GameManager : MonoBehaviour
         if (vidasActuales > 0)
             StartCoroutine(RespawnPacman());
         else
+        {
+            PlayerPrefs.SetString("LastLevel", SceneManager.GetActiveScene().name);
             SceneManager.LoadScene("GameOver");
+        }
     }
 
     private IEnumerator RespawnPacman()

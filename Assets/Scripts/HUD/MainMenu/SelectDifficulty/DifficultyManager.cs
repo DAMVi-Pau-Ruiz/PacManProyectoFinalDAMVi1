@@ -6,19 +6,19 @@ public class DifficultyManager : MonoBehaviour
     public void SetEasy()
     {
         PlayerPrefs.SetInt("difficulty", (int)GameManager.Difficulty.Easy);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("SelectMap");
     }
 
     public void SetNormal()
     {
         PlayerPrefs.SetInt("difficulty", (int)GameManager.Difficulty.Normal);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("SelectMap");
     }
 
     public void SetHard()
     {
         PlayerPrefs.SetInt("difficulty", (int)GameManager.Difficulty.Hard);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("SelectMap");
     }
 
     public void GetBack()

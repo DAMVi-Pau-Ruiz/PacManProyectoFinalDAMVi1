@@ -27,7 +27,8 @@ public class GameOverUI : MonoBehaviour
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("Level1");
+            string nivel = PlayerPrefs.GetString("LastLevel", "Level1");
+            SceneManager.LoadScene(nivel);
         }
     }
 }
