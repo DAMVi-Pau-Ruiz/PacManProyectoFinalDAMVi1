@@ -1,34 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
-    [SerializeField]
-    TextMeshProUGUI valueHighscore;
+    [SerializeField] TextMeshProUGUI valueHighscore;
+    [SerializeField] RankingSystem highscoreSystem; 
 
-    // Start is called before the first frame update
     void Start()
     {
-        valueHighscore.text = GameManager.instance.getScoreActual().ToString();
+        int score = GameManager.instance.getScoreActual();
+        valueHighscore.text = score.ToString();
+
+        // guardar en ranking
+        string username = PlayerPrefs.GetString("username", "AAA");
+        highscoreSystem.AddScore(username, score);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void goScoreTable()
     {
-        pressToRestart();
-    }
-
-    public void pressToRestart()
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            string nivel = PlayerPrefs.GetString("LastLevel", "Level1");
-            SceneManager.LoadScene(nivel);
-        }
+        Time.timeScale = 1;
+        SceneManager.LoadScene("HighscoreTable");
     }
 }

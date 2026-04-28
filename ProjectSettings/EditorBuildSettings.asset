@@ -38,5 +38,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Login/LoginUser.unity
     guid: e8343b3d7147b4648ab68bdbd33beda6
+  - enabled: 1
+    path: Assets/Scenes/Levels/HighscoreTable/HighscoreTable.unity
+    guid: 3780932a1de71874e82cc6e114f03c8c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 88a6f22bd915b4645ab9764ccf84a901, type: 2}

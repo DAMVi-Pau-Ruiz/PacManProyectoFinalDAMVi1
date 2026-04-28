@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UserLogin : MonoBehaviour
 {
@@ -108,7 +109,16 @@ public class UserLogin : MonoBehaviour
     void Confirm()
     {
         string username = GetUsername();
+
+        PlayerPrefs.SetString("username", username);
+        PlayerPrefs.Save();
+
         Debug.Log("Jugador: " + username);
+
+        // Cargar mapa seleccionado
+        string map = PlayerPrefs.GetString("SelectedMap", "Level1");
+
+        SceneManager.LoadScene(map);
     }
 
     public string GetUsername()
