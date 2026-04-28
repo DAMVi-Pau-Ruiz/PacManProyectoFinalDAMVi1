@@ -11,17 +11,17 @@
                     "id": "8121c58d-fbd5-4fd9-a608-847722c33e9c",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": true
                 },
                 {
                     "name": "MoveVertical",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "011e670a-44a7-4247-8528-a04e2a49a7c0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Press",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Confirm",

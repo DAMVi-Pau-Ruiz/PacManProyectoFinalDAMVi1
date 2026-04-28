@@ -4,37 +4,36 @@ using UnityEngine.InputSystem;
 
 public class UserLogin : MonoBehaviour
 {
-    public TMP_Text[] slotsTexts;
+    
+    public TMP_Text[] slotsTexts;              // Letras visibles
+    public RectTransform arrow;                // Flecha debajo
+    public RectTransform[] slotPositions;      // Posiciones de cada letra
 
     char[] characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ".ToCharArray();
 
     int[] slots = new int[3];
     int selectedSlot = 0;
 
-    Vector2 input;
-    float inputDelay = 0.2f;
-    float lastInputTime;
+    float horizontal;
+    float vertical;
 
     void Start()
     {
         UpdateUI();
-        Debug.Log("Slots conectados: " + slotsTexts.Length);
-    }
-
-    void Update()
-    {
-        HandleInput();
+        UpdateArrow();
     }
 
     // INPUT SYSTEM (Send Messages)
-    public void OnMove(InputValue value)
+    public void OnMoveHorizontal(InputValue value)
     {
-        input = value.Get<Vector2>();
+        horizontal = value.Get<float>();
+        HandleHorizontal();
+    }
 
-        // DEBUG (muy importante para comprobar que funciona)
-        // Debug.Log("INPUT: " + input);
-
-        Debug.Log("INPUT RAW: " + input);
+    public void OnMoveVertical(InputValue value)
+    {
+        vertical = value.Get<float>();
+        HandleVertical();
     }
 
     public void OnConfirm()
@@ -42,45 +41,40 @@ public class UserLogin : MonoBehaviour
         Confirm();
     }
 
-    void HandleInput()
+    // --- MOVIMIENTO ENTRE SLOTS (A / D) ---
+    void HandleHorizontal()
     {
-        if (Time.time - lastInputTime < inputDelay)
-            return;
-
-        if (input == Vector2.zero)
-            return;
-
-        // HORIZONTAL
-        if (input.x > 0.5f)
+        if (horizontal > 0.5f)
         {
             selectedSlot++;
-            lastInputTime = Time.time;
         }
-        else if (input.x < -0.5f)
+        else if (horizontal < -0.5f)
         {
             selectedSlot--;
-            lastInputTime = Time.time;
         }
 
         selectedSlot = Mathf.Clamp(selectedSlot, 0, 2);
 
-        // VERTICAL
-        if (input.y > 0.5f)
-        {
-            slots[selectedSlot]++;
-            Wrap();
-            UpdateUI();
-            lastInputTime = Time.time;
-        }
-        else if (input.y < -0.5f)
-        {
-            slots[selectedSlot]--;
-            Wrap();
-            UpdateUI();
-            lastInputTime = Time.time;
-        }
+        UpdateArrow();
     }
 
+    // --- CAMBIO DE LETRA (W / S) ---
+    void HandleVertical()
+    {
+        if (vertical > 0.5f)
+        {
+            slots[selectedSlot]++;
+        }
+        else if (vertical < -0.5f)
+        {
+            slots[selectedSlot]--;
+        }
+
+        Wrap();
+        UpdateUI();
+    }
+
+    // --- ENVOLVER ALFABETO ---
     void Wrap()
     {
         if (slots[selectedSlot] < 0)
@@ -90,28 +84,31 @@ public class UserLogin : MonoBehaviour
             slots[selectedSlot] = 0;
     }
 
+    // --- ACTUALIZAR LETRAS ---
     void UpdateUI()
     {
         for (int i = 0; i < 3; i++)
         {
-            if (slotsTexts[i] != null)
-                slotsTexts[i].text = characters[slots[i]].ToString();
+            slotsTexts[i].text = characters[slots[i]].ToString();
         }
     }
 
+    // --- MOVER FLECHA ---
+    void UpdateArrow()
+    {
+        if (arrow != null && slotPositions[selectedSlot] != null)
+        {
+            Vector2 pos = arrow.anchoredPosition;
+            pos.x = slotPositions[selectedSlot].anchoredPosition.x;
+            arrow.anchoredPosition = pos;
+        }
+    }
+
+    // --- CONFIRMAR NOMBRE ---
     void Confirm()
     {
         string username = GetUsername();
-
-        if (string.IsNullOrWhiteSpace(username))
-        {
-            Debug.Log("Nombre inválido");
-            return;
-        }
-
         Debug.Log("Jugador: " + username);
-
-        // MongoDB o cambio de escena aquí
     }
 
     public string GetUsername()
