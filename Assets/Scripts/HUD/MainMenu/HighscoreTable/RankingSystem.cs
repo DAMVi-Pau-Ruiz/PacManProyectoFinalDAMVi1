@@ -38,6 +38,7 @@ public class RankingSystem : MonoBehaviour
     void Update()
     {
         pressToRestart();
+        returnToMenu();
     }
     public void AddScore(string username, int newScore)
     {
@@ -152,6 +153,14 @@ public class RankingSystem : MonoBehaviour
         {
             string nivel = PlayerPrefs.GetString("LastLevel", "Level1");
             SceneManager.LoadScene(nivel);
+        }
+    }
+
+    public void returnToMenu()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
