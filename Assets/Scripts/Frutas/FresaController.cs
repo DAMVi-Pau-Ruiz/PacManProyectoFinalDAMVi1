@@ -13,7 +13,7 @@ public class FresaController : FruitController
         {
             collision.gameObject.GetComponent<PacMan_Puntuaje>().addPuntos(puntos);
 
-            collision.GetComponent<PacMan_Controller>().ActivarSpeedBoost(multSpeed, duration);
+            collision.GetComponent<Controller_PacMan>().ActivarSpeedBoost(multSpeed, duration);
 
             FindObjectOfType<FruitManager>().FrutaComida();
 

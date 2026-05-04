@@ -10,7 +10,7 @@ public class PlatanoController : FruitController
         {
             collision.gameObject.GetComponent<PacMan_Puntuaje>().addPuntos(puntos);
 
-            collision.GetComponent<PacMan_Controller>().ActivarInvincible(duration);
+            collision.GetComponent<Controller_PacMan>().ActivarInvincible(duration);
 
             FindObjectOfType<FruitManager>().FrutaComida();
 

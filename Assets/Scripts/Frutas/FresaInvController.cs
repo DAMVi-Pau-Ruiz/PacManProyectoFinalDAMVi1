@@ -10,7 +10,7 @@ public class FresaInvController : FruitController
         {
             collision.gameObject.GetComponent<PacMan_Puntuaje>().addPuntos(puntos);
 
-            collision.gameObject.GetComponent<PacMan_Controller>().ActivarInvertido(duration);
+            collision.gameObject.GetComponent<Controller_PacMan>().ActivarInvertido(duration);
 
             FindObjectOfType<FruitManager>().FrutaComida();
 
