@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] int vidasIniciales = 3;
 
     private int vidasActuales;
-    private bool modoDiabloActivo = false;
     private Coroutine modoDiabloCoroutine;
     public GameObject currentPacman;
     private Coroutine invisGhostsCoroutine;
     private int scoreActual;
+    private PacMan_Controller pacman;
 
     public enum Difficulty { Easy, Normal, Hard }
     public Difficulty currentDifficulty = Difficulty.Normal;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     {
         vidasActuales = vidasIniciales;
         LivesController.instance.UpdateLives(vidasActuales);
+        pacman = FindObjectOfType<PacMan_Controller>();
     }
 
     public void PacmanDied()
@@ -47,10 +48,7 @@ public class GameManager : MonoBehaviour
         if (vidasActuales > 0)
             StartCoroutine(RespawnPacman());
         else
-        {
-            PlayerPrefs.SetString("LastLevel", SceneManager.GetActiveScene().name);
             SceneManager.LoadScene("GameOver");
-        }
     }
 
     private IEnumerator RespawnPacman()
@@ -58,6 +56,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         GameObject newPacman = Instantiate(pacmanPrefab, spawnPoint.position, Quaternion.identity);
+
+        pacman = newPacman.GetComponent<PacMan_Controller>();
     }
 
     public void ModoDiabloActivado(float tiempo)
@@ -70,14 +70,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ModoDiabloRutina(float tiempo)
     {
-        modoDiabloActivo = true;
+        pacman.state = PacMan_Controller.PacManState.DIABLO;
         yield return new WaitForSeconds(tiempo);
-        modoDiabloActivo = false;
-    }
-
-    public bool IsModoDiabloActivo()
-    {
-        return modoDiabloActivo;
+        pacman.state = PacMan_Controller.PacManState.NORMAL;
     }
 
     public Transform GetPacman()
@@ -146,4 +141,10 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    public PacMan_Controller GetPacmanScript()
+    {
+        return pacman;
+    }
+
 }

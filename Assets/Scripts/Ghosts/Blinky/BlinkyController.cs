@@ -29,6 +29,7 @@ public class BlinkyController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag = false;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
+    private PacMan_Controller pac;
 
 
 
@@ -42,6 +43,7 @@ public class BlinkyController : GhostsController, IInvertibleDirection
 
     private void FixedUpdate()
     {
+        pac = GameManager.instance.GetPacmanScript();
         playerObj = GameObject.FindGameObjectWithTag("Player");
 
         UpdateUltimaCasillaSegura();
@@ -71,7 +73,7 @@ public class BlinkyController : GhostsController, IInvertibleDirection
         }
 
         // --- MODO DIABLO: movimiento aleatorio ---
-        if (GameManager.instance.IsModoDiabloActivo())
+        if (pac != null && pac.state == PacMan_Controller.PacManState.DIABLO)
         {
             if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
             {
@@ -171,7 +173,11 @@ public class BlinkyController : GhostsController, IInvertibleDirection
 
     private void UpdateSprite()
     {
-        if (!GameManager.instance.IsModoDiabloActivo())
+        if (pac != null && pac.state == PacMan_Controller.PacManState.DIABLO)
+        {
+            sr.sprite = scaredSprite;
+        }
+        else
         {
             if (currentDirection == Vector2.up)
             {
@@ -189,10 +195,6 @@ public class BlinkyController : GhostsController, IInvertibleDirection
             {
                 sr.sprite = lookRight;
             }
-        }
-        else
-        {
-            sr.sprite = scaredSprite;
         }
     }
 
