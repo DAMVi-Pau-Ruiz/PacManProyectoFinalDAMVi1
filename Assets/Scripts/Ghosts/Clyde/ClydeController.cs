@@ -31,9 +31,16 @@ public class ClydeController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag = false;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
+<<<<<<< HEAD
+=======
+    private PacMan_Controller pac;
+>>>>>>> fc58e51a4e400820d81d7e3a47184122c131305b
 
-    private void Start()
+
+
+    void Start()
     {
+
         rgb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         BuscarPlayer();
@@ -41,6 +48,7 @@ public class ClydeController : GhostsController, IInvertibleDirection
 
     private void FixedUpdate()
     {
+        pac = GameManager.instance.GetPacmanScript();
         playerObj = GameObject.FindGameObjectWithTag("Player");
 
         UpdateUltimaCasillaSegura();
@@ -69,7 +77,7 @@ public class ClydeController : GhostsController, IInvertibleDirection
             return;
         }
 
-        if (GameManager.instance.IsModoDiabloActivo())
+        if (pac != null && pac.state == PacMan_Controller.PacManState.DIABLO)
         {
             if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
             {
@@ -192,7 +200,11 @@ public class ClydeController : GhostsController, IInvertibleDirection
 
     private void UpdateSprite()
     {
-        if (!GameManager.instance.IsModoDiabloActivo())
+        if (pac != null && pac.state == PacMan_Controller.PacManState.DIABLO)
+        {
+            sr.sprite = scaredSprite;
+        }
+        else
         {
             if (currentDirection == Vector2.up)
             {
@@ -210,10 +222,6 @@ public class ClydeController : GhostsController, IInvertibleDirection
             {
                 sr.sprite = lookRight;
             }
-        }
-        else
-        {
-            sr.sprite = scaredSprite;
         }
     }
 

@@ -12,6 +12,9 @@ public class GhostsController : MonoBehaviour
  
     protected SpriteRenderer sr;
     private bool isInvisible = false;
+
+
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();

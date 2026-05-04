@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,20 +12,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] int vidasIniciales = 3;
 
     private int vidasActuales;
-    private bool modoDiabloActivo = false;
     private Coroutine modoDiabloCoroutine;
     public GameObject currentPacman;
     private Coroutine invisGhostsCoroutine;
+    private int scoreActual;
+    private PacMan_Controller pacman;
+
+    public enum Difficulty { Easy, Normal, Hard }
+    public Difficulty currentDifficulty = Difficulty.Normal;
 
     private void Awake()
     {
         instance = this;
+
+        if (PlayerPrefs.HasKey("difficulty"))
+        {
+            currentDifficulty = (Difficulty)PlayerPrefs.GetInt("difficulty");
+        }
+
+        AplicarDificultad();
     }
 
     private void Start()
     {
         vidasActuales = vidasIniciales;
         LivesController.instance.UpdateLives(vidasActuales);
+        pacman = FindObjectOfType<PacMan_Controller>();
     }
 
     public void PacmanDied()
@@ -35,7 +48,7 @@ public class GameManager : MonoBehaviour
         if (vidasActuales > 0)
             StartCoroutine(RespawnPacman());
         else
-            Debug.Log("Has perdido");
+            SceneManager.LoadScene("GameOver");
     }
 
     private IEnumerator RespawnPacman()
@@ -43,6 +56,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         GameObject newPacman = Instantiate(pacmanPrefab, spawnPoint.position, Quaternion.identity);
+
+        pacman = newPacman.GetComponent<PacMan_Controller>();
     }
 
     public void ModoDiabloActivado(float tiempo)
@@ -55,14 +70,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ModoDiabloRutina(float tiempo)
     {
-        modoDiabloActivo = true;
+        pacman.state = PacMan_Controller.PacManState.DIABLO;
         yield return new WaitForSeconds(tiempo);
-        modoDiabloActivo = false;
-    }
-
-    public bool IsModoDiabloActivo()
-    {
-        return modoDiabloActivo;
+        pacman.state = PacMan_Controller.PacManState.NORMAL;
     }
 
     public Transform GetPacman()
@@ -100,4 +110,41 @@ public class GameManager : MonoBehaviour
         foreach (var g in ghosts)
             g.SetInvisible(false);
     }
+
+    public void AddScore(int puntos)
+    {
+        scoreActual += puntos;
+    }
+
+    public int getScoreActual()
+    {
+        return scoreActual;
+    }
+
+    public void ResetScore()
+    {
+        scoreActual = 0;
+    }
+
+    private void AplicarDificultad()
+    {
+        switch (currentDifficulty)
+        {
+            case Difficulty.Easy:
+                vidasIniciales = 3;
+                break;
+            case Difficulty.Normal:
+                vidasIniciales = 2;
+                break;
+            case Difficulty.Hard:
+                vidasIniciales = 1;
+                break;
+        }
+    }
+
+    public PacMan_Controller GetPacmanScript()
+    {
+        return pacman;
+    }
+
 }

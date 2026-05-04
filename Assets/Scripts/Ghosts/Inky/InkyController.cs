@@ -29,12 +29,19 @@ public class InkyController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag = false;
     private GameObject target;
     private Vector2 ultimaCasillaSegura;
+<<<<<<< HEAD
+=======
+    private PacMan_Controller pac;
+>>>>>>> fc58e51a4e400820d81d7e3a47184122c131305b
 
-    private void Start()
+
+
+    void Start()
     {
+
         rgb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        
+
         float cx = Mathf.Floor(transform.position.x) + 0.5f;
         float cy = Mathf.Floor(transform.position.y) + 0.5f;
         transform.position = new Vector2(cx, cy);
@@ -44,7 +51,8 @@ public class InkyController : GhostsController, IInvertibleDirection
 
     private void FixedUpdate()
     {
-            target = GameObject.FindGameObjectWithTag("Esquina");
+        pac = GameManager.instance.GetPacmanScript();
+        target = GameObject.FindGameObjectWithTag("Esquina");
 
         UpdateUltimaCasillaSegura();
 
@@ -70,8 +78,8 @@ public class InkyController : GhostsController, IInvertibleDirection
         {
             return;
         }
-        
-        if (GameManager.instance.IsModoDiabloActivo())
+
+        if (pac != null && pac.state == PacMan_Controller.PacManState.DIABLO)
         {
             if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
             {
@@ -182,7 +190,11 @@ public class InkyController : GhostsController, IInvertibleDirection
 
     private void UpdateSprite()
     {
-        if (!GameManager.instance.IsModoDiabloActivo())
+        if (pac != null && pac.state == PacMan_Controller.PacManState.DIABLO)
+        {
+            sr.sprite = scaredSprite;
+        }
+        else
         {
             if (currentDirection == Vector2.up)
             {
@@ -200,10 +212,6 @@ public class InkyController : GhostsController, IInvertibleDirection
             {
                 sr.sprite = lookRight;
             }
-        }
-        else
-        {
-            sr.sprite = scaredSprite;
         }
     }
 

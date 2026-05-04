@@ -149,14 +149,14 @@ RectTransform:
   m_GameObject: {fileID: 59461218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.575, y: 0.11254, z: 1}
+  m_LocalScale: {x: 4.575, y: 0.13645475, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1505038248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -985, y: -443.22168}
+  m_AnchoredPosition: {x: -985, y: -560}
   m_SizeDelta: {x: 337.0104, y: 1289.004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &59461220
@@ -292,7 +292,7 @@ RectTransform:
   m_GameObject: {fileID: 696013900}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1505038248}
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da991384163cf44399ca07be9fd0eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 85
+  speed: 100
   duration: 25
 --- !u!114 &1186889167
 MonoBehaviour:
@@ -728,14 +728,14 @@ RectTransform:
   m_GameObject: {fileID: 1474476758}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.275, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1505038248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -107.4023, y: 0.01}
+  m_AnchoredPosition: {x: -107.4023, y: -2}
   m_SizeDelta: {x: 337.0104, y: 1008.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1474476760
@@ -1060,7 +1060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -985, y: 440.28}
+  m_AnchoredPosition: {x: -985, y: 500}
   m_SizeDelta: {x: 337.0104, y: 1137.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2016228402

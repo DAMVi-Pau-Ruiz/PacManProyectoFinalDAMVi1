@@ -1976,8 +1976,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pacmanPrefab: {fileID: 4982819892643613117, guid: d2ba774836fc50e4489b343c27951529, type: 3}
   spawnPoint: {fileID: 996749748}
-  vidasIniciales: 3
   currentPacman: {fileID: 0}
+  currentDifficulty: 0
 --- !u!4 &416371636
 Transform:
   m_ObjectHideFlags: 0

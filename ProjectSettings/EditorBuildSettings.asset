@@ -14,5 +14,32 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 21c6b3cc03fffaa4a924095c9ecf7760
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: 123033eb0a4178844ba28a5804c3e996
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 8967a56f97ada3c43b332a3ce1c765a8
+  - enabled: 1
+    path: Assets/Scenes/Levels/SelectDifficulty/DifficultyTypes.unity
+    guid: 8e1290fadf3d86a4bbc133510c06685e
+  - enabled: 1
+    path: Assets/Scenes/Levels/SelectMap/SelectMap.unity
+    guid: 7c9d00634b58c8846b3261e431bf7b8f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level2.unity
+    guid: 3f0808f4ea18e404f9f3150fe7af020d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level3.unity
+    guid: e75fea68d5bfdb640bc462c73fa54c01
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level4.unity
+    guid: 7e9e82b88006c4f468aab778f25d4963
+  - enabled: 1
+    path: Assets/Scenes/Levels/Login/LoginUser.unity
+    guid: e8343b3d7147b4648ab68bdbd33beda6
+  - enabled: 1
+    path: Assets/Scenes/Levels/HighscoreTable/HighscoreTable.unity
+    guid: 3780932a1de71874e82cc6e114f03c8c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 88a6f22bd915b4645ab9764ccf84a901, type: 2}

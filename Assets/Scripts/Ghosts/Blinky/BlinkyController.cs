@@ -29,9 +29,16 @@ public class BlinkyController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag = false;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
+<<<<<<< HEAD
+=======
+    private PacMan_Controller pac;
+>>>>>>> fc58e51a4e400820d81d7e3a47184122c131305b
 
-    private void Start()
+
+
+    void Start()
     {
+
         rgb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         BuscarPlayer();
@@ -39,6 +46,7 @@ public class BlinkyController : GhostsController, IInvertibleDirection
 
     private void FixedUpdate()
     {
+        pac = GameManager.instance.GetPacmanScript();
         playerObj = GameObject.FindGameObjectWithTag("Player");
 
         UpdateUltimaCasillaSegura();
@@ -51,7 +59,8 @@ public class BlinkyController : GhostsController, IInvertibleDirection
         }
         Move();
         UpdateSprite();
-        TryChangeDirection();        
+        TryChangeDirection();
+        Debug.Log("Velocidad: " + speed);
     }
 
     void Move()
@@ -67,7 +76,7 @@ public class BlinkyController : GhostsController, IInvertibleDirection
         }
 
         // --- MODO DIABLO: movimiento aleatorio ---
-        if (GameManager.instance.IsModoDiabloActivo())
+        if (pac != null && pac.state == PacMan_Controller.PacManState.DIABLO)
         {
             if (IsAtCenterOfTile() && estaNodo && !giroNodoFlag)
             {
@@ -167,7 +176,11 @@ public class BlinkyController : GhostsController, IInvertibleDirection
 
     private void UpdateSprite()
     {
-        if (!GameManager.instance.IsModoDiabloActivo())
+        if (pac != null && pac.state == PacMan_Controller.PacManState.DIABLO)
+        {
+            sr.sprite = scaredSprite;
+        }
+        else
         {
             if (currentDirection == Vector2.up)
             {
@@ -185,10 +198,6 @@ public class BlinkyController : GhostsController, IInvertibleDirection
             {
                 sr.sprite = lookRight;
             }
-        }
-        else
-        {
-            sr.sprite = scaredSprite;
         }
     }
 

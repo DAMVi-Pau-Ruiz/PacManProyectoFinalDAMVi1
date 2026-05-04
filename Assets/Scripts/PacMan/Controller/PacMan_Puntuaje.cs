@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PacMan_Puntuaje : MonoBehaviour
 {
-    private int puntosTotales = 0;
+
     private Coroutine multiCoroutine;
     private int multiPuntos = 1;
     public void addPuntos(int puntosConseguidos)
     {
-        puntosTotales += (puntosConseguidos * multiPuntos);
-        HUDController.instance.AddScore(puntosConseguidos * multiPuntos);
+        int puntosFinales = puntosConseguidos * multiPuntos;
+        HUDController.instance.AddScore(puntosFinales);
+        GameManager.instance.AddScore(puntosFinales);
     }
 
     public void ActivarMulti(int multi, float duracion)
