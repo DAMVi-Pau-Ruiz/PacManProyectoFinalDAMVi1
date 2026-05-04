@@ -25,4 +25,9 @@ public class DifficultyManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void ReturnGameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
 }

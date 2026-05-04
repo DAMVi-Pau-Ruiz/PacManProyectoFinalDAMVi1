@@ -17,6 +17,8 @@ public class FresaController : FruitController
 
             FindObjectOfType<FruitManager>().FrutaComida();
 
+            GameManager.instance.fresaComida = true;
+
             Destroy(gameObject);
         }
     }

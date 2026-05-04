@@ -14,6 +14,8 @@ public class PlatanoController : FruitController
 
             FindObjectOfType<FruitManager>().FrutaComida();
 
+            GameManager.instance.platanoComido = true;
+
             Destroy(gameObject);
         }
     }

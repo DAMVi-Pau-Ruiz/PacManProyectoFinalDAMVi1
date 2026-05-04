@@ -23,4 +23,10 @@ public class GameOverUI : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("HighscoreTable");
     }
+
+    public void goUnblockedFruits()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("UnblockedFruits");
+    }
 }

@@ -19,10 +19,10 @@ public class MongoDBManage1 : MonoBehaviour
         Debug.Log("Conectado a MongoDB Atlas");
     }
 
-    public async Task SaveSession(SessionData data)
+    /*public async Task SaveSession(SessionData data)
     {
         var doc = data.ToBsonDocument();
         await collection.InsertOneAsync(doc);
         Debug.Log("Sesión guardada en Atlas");
-    }
+    }*/
 }

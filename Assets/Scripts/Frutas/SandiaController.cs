@@ -14,6 +14,8 @@ public class SandiaController : FruitController
 
             FindObjectOfType<FruitManager>().FrutaComida();
 
+            GameManager.instance.sandiaComida = true;
+
             Destroy(gameObject);
         }
     }

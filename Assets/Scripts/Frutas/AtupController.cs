@@ -14,6 +14,8 @@ public class AtupController : FruitController
 
             FindObjectOfType<FruitManager>().FrutaComida();
 
+            GameManager.instance.atupComida = true;
+
             Destroy(gameObject);
         }
     }

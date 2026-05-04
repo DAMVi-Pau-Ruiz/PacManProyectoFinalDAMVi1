@@ -17,6 +17,8 @@ public class CerezaController : FruitController
 
             FindObjectOfType<FruitManager>().FrutaComida();
 
+            GameManager.instance.cerezaComida = true;
+
             Destroy(gameObject);
         }
     }

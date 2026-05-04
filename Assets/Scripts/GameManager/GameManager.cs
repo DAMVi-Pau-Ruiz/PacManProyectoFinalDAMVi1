@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public enum Difficulty { Easy, Normal, Hard }
     public Difficulty currentDifficulty = Difficulty.Normal;
 
+    public bool cerezaComida, fresaComida, platanoComido, manzanaComida, sandiaComida, atupComida, fresaInvComida;
+
     private void Awake()
     {
         instance = this;
@@ -38,6 +40,16 @@ public class GameManager : MonoBehaviour
         vidasActuales = vidasIniciales;
         LivesController.instance.UpdateLives(vidasActuales);
         pacman = FindObjectOfType<PacMan_Controller>();
+
+        /*FRUTAS BLOQUEADAS AL EMPEZAR JUEGO*/
+
+        cerezaComida = false;
+        fresaComida = false;
+        platanoComido = false;
+        manzanaComida = false;
+        sandiaComida = false;
+        atupComida = false;
+        fresaInvComida = false;
     }
 
     public void PacmanDied()

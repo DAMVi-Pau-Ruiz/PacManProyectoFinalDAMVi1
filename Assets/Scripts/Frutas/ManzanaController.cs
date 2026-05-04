@@ -14,6 +14,8 @@ public class ManzanaController : FruitController
 
             FindObjectOfType<FruitManager>().FrutaComida();
 
+            GameManager.instance.manzanaComida = true;
+
             Destroy(gameObject);
         }
     }
