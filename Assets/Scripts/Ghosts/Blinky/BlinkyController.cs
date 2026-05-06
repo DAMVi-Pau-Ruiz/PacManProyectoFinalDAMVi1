@@ -29,10 +29,7 @@ public class BlinkyController : GhostsController, IInvertibleDirection
     private bool giroNodoFlag = false;
     private GameObject playerObj;
     private Vector2 ultimaCasillaSegura;
-<<<<<<< HEAD
-=======
     private PacMan_Controller pac;
->>>>>>> fc58e51a4e400820d81d7e3a47184122c131305b
 
 
 

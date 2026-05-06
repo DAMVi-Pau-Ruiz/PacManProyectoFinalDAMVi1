@@ -3,12 +3,14 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Threading.Tasks;
 
-public class MongoDBManage : MonoBehaviour
+public class MongoDBManager : MonoBehaviour
 {
     private IMongoCollection<BsonDocument> collection;
 
-    private async void Start()
+    private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         string connectionString =
             "mongodb+srv://a25pauruibar_db_user:MongoDB-PACMAN@pacman.mp7s18p.mongodb.net/?appName=pacman";
 
@@ -18,21 +20,22 @@ public class MongoDBManage : MonoBehaviour
         collection = database.GetCollection<BsonDocument>("Sessions");
 
         Debug.Log("Conectado a MongoDB Atlas");
-
-        await InsertDummyData();
     }
 
-    private async Task InsertDummyData()
+    public async Task SaveSession(string player, float duracion, int bolasComidas, int fantasmasComidos, int nivelesCompletados)
     {
         var doc = new BsonDocument
         {
-            { "player", "Pau" },
-            { "testValue", Random.Range(0, 9999) },
+            { "player", player },
+            { "duracion", duracion },
+            { "bolasComidas", bolasComidas },
+            { "fantasmasComidos", fantasmasComidos },
+            { "nivelesCompletados", nivelesCompletados },
             { "timestamp", System.DateTime.UtcNow }
         };
 
         await collection.InsertOneAsync(doc);
 
-        Debug.Log("Documento insertado en Atlas");
+        Debug.Log("Sesión guardada en MongoDB");
     }
 }
