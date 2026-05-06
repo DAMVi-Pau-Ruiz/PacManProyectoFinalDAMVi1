@@ -23,9 +23,9 @@ public class GameManager : MonoBehaviour
     public enum Difficulty { Easy, Normal, Hard }
     public Difficulty currentDifficulty = Difficulty.Normal;
 
-<<<<<<< HEAD
+
     public bool cerezaComida, fresaComida, platanoComido, manzanaComida, sandiaComida, atupComida, fresaInvComida;
-=======
+
     private MongoDBManager mongo;
 
     // --- ESTADÍSTICAS ---
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public int nivelesCompletados;
 
     private float tiempoInicio;
->>>>>>> origin/Merge3
+
 
     private void Awake()
     {
@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
 
         pacman = FindObjectOfType<PacMan_Controller>();
 
-<<<<<<< HEAD
         /*FRUTAS BLOQUEADAS AL EMPEZAR JUEGO*/
 
         cerezaComida = false;
@@ -68,14 +67,14 @@ public class GameManager : MonoBehaviour
         sandiaComida = false;
         atupComida = false;
         fresaInvComida = false;
-=======
+
         if (mongo == null)
         {
             mongo = FindObjectOfType<MongoDBManager>();
         }
 
         tiempoInicio = Time.time;
->>>>>>> origin/Merge3
+
     }
 
     public void PacmanDied()
