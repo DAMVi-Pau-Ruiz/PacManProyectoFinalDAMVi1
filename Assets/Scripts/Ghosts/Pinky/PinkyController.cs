@@ -33,7 +33,6 @@ public class PinkyController : GhostsController, IInvertibleDirection
     private PacMan_Controller pac;
 
 
-
     void Start()
     {
 

@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -21,10 +23,24 @@ public class GameManager : MonoBehaviour
     public enum Difficulty { Easy, Normal, Hard }
     public Difficulty currentDifficulty = Difficulty.Normal;
 
+<<<<<<< HEAD
     public bool cerezaComida, fresaComida, platanoComido, manzanaComida, sandiaComida, atupComida, fresaInvComida;
+=======
+    private MongoDBManager mongo;
+
+    // --- ESTADÍSTICAS ---
+    public float duracion;
+    public int bolasComidas;
+    public int fantasmasComidos;
+    public int nivelesCompletados;
+
+    private float tiempoInicio;
+>>>>>>> origin/Merge3
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         instance = this;
 
         if (PlayerPrefs.HasKey("difficulty"))
@@ -39,8 +55,10 @@ public class GameManager : MonoBehaviour
     {
         vidasActuales = vidasIniciales;
         LivesController.instance.UpdateLives(vidasActuales);
+
         pacman = FindObjectOfType<PacMan_Controller>();
 
+<<<<<<< HEAD
         /*FRUTAS BLOQUEADAS AL EMPEZAR JUEGO*/
 
         cerezaComida = false;
@@ -50,6 +68,14 @@ public class GameManager : MonoBehaviour
         sandiaComida = false;
         atupComida = false;
         fresaInvComida = false;
+=======
+        if (mongo == null)
+        {
+            mongo = FindObjectOfType<MongoDBManager>();
+        }
+
+        tiempoInicio = Time.time;
+>>>>>>> origin/Merge3
     }
 
     public void PacmanDied()
@@ -58,9 +84,13 @@ public class GameManager : MonoBehaviour
         LivesController.instance.UpdateLives(vidasActuales);
 
         if (vidasActuales > 0)
+        {
             StartCoroutine(RespawnPacman());
+        }
         else
+        {
             SceneManager.LoadScene("GameOver");
+        }
     }
 
     private IEnumerator RespawnPacman()
@@ -159,4 +189,37 @@ public class GameManager : MonoBehaviour
         return pacman;
     }
 
+    private void Update()
+    {
+        duracion = Time.time - tiempoInicio;
+    }
+
+    public async Task GuardarSesion()
+    {
+        string player = PlayerPrefs.GetString("username", "AAA");
+
+        if (mongo != null)
+        {
+            await mongo.SaveSession(player, duracion, bolasComidas, fantasmasComidos, nivelesCompletados);
+        }
+        else
+        {
+            Debug.LogError("MongoDBManager no encontrado en la escena");
+        }
+    }
+
+    public void addPelletEaten()
+    {
+        bolasComidas++;
+    }
+
+    public void addGhostEaten()
+    {
+        fantasmasComidos++;
+    }
+
+    public void addLevelCompleted()
+    {
+        nivelesCompletados++;
+    }
 }

@@ -195,6 +195,7 @@ public class PacMan_Controller : MonoBehaviour
         Destroy(collision.gameObject);
         FindObjectOfType<GhostsSpawner>().MarkGhostAsEaten(ghostName);
         gameObject.GetComponent<PacMan_Puntuaje>().addPuntos(collision.GetComponent<GhostsController>().GetPuntos());
+        GameManager.instance.addGhostEaten();
     }
 
     private IEnumerator DeathSequence()

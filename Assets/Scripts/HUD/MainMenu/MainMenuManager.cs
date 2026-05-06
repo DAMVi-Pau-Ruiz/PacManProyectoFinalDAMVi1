@@ -15,8 +15,9 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("DifficultyTypes");
     }
 
-    public void QuitGame()
+    public async void QuitGame()
     {
+        await GameManager.instance.GuardarSesion();
         Application.Quit();
 
 #if UNITY_EDITOR

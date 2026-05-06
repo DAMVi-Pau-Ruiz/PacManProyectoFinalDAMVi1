@@ -25,6 +25,7 @@ public class BolasManager : MonoBehaviour
         if (pelletsRemaining <= 0)
         {
             RespawnAllPellets();
+            GameManager.instance.addLevelCompleted();
         }
     }
 

@@ -21,6 +21,8 @@ public class BolaPetitController : MonoBehaviour
 
             BolasManager.Instance.PelletEaten();
 
+            GameManager.instance.addPelletEaten();
+
             Destroy(gameObject);
         }
     }
