@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Esquina
   - GhostSpawn
+  - Saver
   layers:
   - Default
   - TransparentFX

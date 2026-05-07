@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
 
     private float tiempoInicio;
 
+    public PlayerDataSaver saver;
+
 
     private void Awake()
     {
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
         }
 
         AplicarDificultad();
+
+        saver = GetComponent<PlayerDataSaver>();
     }
 
     private void Start()
@@ -221,4 +225,55 @@ public class GameManager : MonoBehaviour
     {
         nivelesCompletados++;
     }
+
+    void EndGame(int puntuacion)
+    {
+        string nombre = PlayerPrefs.GetString("username", "AAA");
+
+        saver.GuardarDatos(nombre, puntuacion);
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "GameOver")
+        {
+            Debug.Log("Entramos en GameOver, buscando saver por tag...");
+
+            GameObject saverObj = GameObject.FindGameObjectWithTag("Saver");
+
+            if (saverObj != null)
+            {
+                PlayerDataSaver saver = saverObj.GetComponent<PlayerDataSaver>();
+
+                if (saver != null)
+                {
+                    string nombre = PlayerPrefs.GetString("username", "AAA");
+                    int puntuacion = getScoreActual();
+
+                    saver.GuardarDatos(nombre, puntuacion);
+
+                    Debug.Log("Datos guardados correctamente desde GameManager.");
+                }
+                else
+                {
+                    Debug.LogError("El objeto con tag 'Saver' NO tiene PlayerDataSaver.");
+                }
+            }
+            else
+            {
+                Debug.LogError("No se encontró ningún objeto con tag 'Saver' en GameOver.");
+            }
+        }
+    }
+
 }
