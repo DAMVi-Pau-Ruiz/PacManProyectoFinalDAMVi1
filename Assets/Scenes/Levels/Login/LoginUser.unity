@@ -506,6 +506,7 @@ MonoBehaviour:
   - {fileID: 1939848209}
   - {fileID: 2094613679}
   - {fileID: 248899941}
+  buttonClick: {fileID: 8300000, guid: ab93d7918a6d02c48a0fa68c19f8a4ab, type: 3}
 --- !u!4 &184861354
 Transform:
   m_ObjectHideFlags: 0

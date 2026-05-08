@@ -8704,6 +8704,18 @@ PrefabInstance:
       propertyPath: vidas
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8748954380924009901, guid: d2ba774836fc50e4489b343c27951529, type: 3}
+      propertyPath: deadSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d950c3fdca62cba40a545ee36a24bc93, type: 3}
+    - target: {fileID: 8748954380924009901, guid: d2ba774836fc50e4489b343c27951529, type: 3}
+      propertyPath: moveSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f038b06d597b49446897d1e471f4e2a5, type: 3}
+    - target: {fileID: 8748954380924009901, guid: d2ba774836fc50e4489b343c27951529, type: 3}
+      propertyPath: eatGhostSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c2b75c26b2b76ce44b5d648b782ad2da, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

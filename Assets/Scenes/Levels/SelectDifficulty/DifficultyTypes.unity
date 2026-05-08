@@ -1013,6 +1013,18 @@ MonoBehaviour:
   vidasIniciales: 3
   currentPacman: {fileID: 0}
   currentDifficulty: 0
+  cerezaComida: 0
+  fresaComida: 0
+  platanoComido: 0
+  manzanaComida: 0
+  sandiaComida: 0
+  atupComida: 0
+  fresaInvComida: 0
+  duracion: 0
+  bolasComidas: 0
+  fantasmasComidos: 0
+  nivelesCompletados: 0
+  saver: {fileID: 0}
 --- !u!4 &796345227
 Transform:
   m_ObjectHideFlags: 0
@@ -2034,6 +2046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c82c832d9aa8149a84a225db4b5e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonClick: {fileID: 8300000, guid: ab93d7918a6d02c48a0fa68c19f8a4ab, type: 3}
 --- !u!4 &1760535644
 Transform:
   m_ObjectHideFlags: 0

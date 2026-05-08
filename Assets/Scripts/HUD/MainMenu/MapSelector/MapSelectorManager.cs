@@ -3,23 +3,30 @@ using UnityEngine.SceneManagement;
 
 public class MapSelectorManager : MonoBehaviour
 {
+
+    public AudioClip buttonClick;
+
     public void PlayLevel1()
     {
+        AudioManager.Instance.PlaySFX(buttonClick);
         SelectMapAndGoLogin("Level1");
     }
 
     public void PlayLevel2()
     {
+        AudioManager.Instance.PlaySFX(buttonClick);
         SelectMapAndGoLogin("Level2");
     }
 
     public void PlayLevel3()
     {
+        AudioManager.Instance.PlaySFX(buttonClick);
         SelectMapAndGoLogin("Level3");
     }
 
     public void PlayLevel4()
     {
+        AudioManager.Instance.PlaySFX(buttonClick);
         SelectMapAndGoLogin("Level4");
     }
 

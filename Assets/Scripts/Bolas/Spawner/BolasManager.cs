@@ -8,6 +8,8 @@ public class BolasManager : MonoBehaviour
 
     private int pelletsRemaining = 0;
 
+
+
     private void Awake()
     {
         Instance = this;
@@ -27,6 +29,7 @@ public class BolasManager : MonoBehaviour
             RespawnAllPellets();
             GameManager.instance.addLevelCompleted();
         }
+
     }
 
     void RespawnAllPellets()

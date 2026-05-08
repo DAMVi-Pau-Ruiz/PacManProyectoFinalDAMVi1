@@ -9,6 +9,7 @@ public class UserLogin : MonoBehaviour
     public TMP_Text[] slotsTexts;              // Letras visibles
     public RectTransform arrow;                // Flecha debajo
     public RectTransform[] slotPositions;      // Posiciones de cada letra
+    public AudioClip buttonClick;
 
     char[] characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ".ToCharArray();
 
@@ -39,6 +40,7 @@ public class UserLogin : MonoBehaviour
 
     public void OnConfirm()
     {
+
         Confirm();
     }
 
@@ -47,10 +49,12 @@ public class UserLogin : MonoBehaviour
     {
         if (horizontal > 0.5f)
         {
+            AudioManager.Instance.PlaySFX(buttonClick);
             selectedSlot++;
         }
         else if (horizontal < -0.5f)
         {
+            AudioManager.Instance.PlaySFX(buttonClick);
             selectedSlot--;
         }
 
@@ -64,10 +68,12 @@ public class UserLogin : MonoBehaviour
     {
         if (vertical > 0.5f)
         {
+            AudioManager.Instance.PlaySFX(buttonClick);
             slots[selectedSlot]++;
         }
         else if (vertical < -0.5f)
         {
+            AudioManager.Instance.PlaySFX(buttonClick);
             slots[selectedSlot]--;
         }
 
