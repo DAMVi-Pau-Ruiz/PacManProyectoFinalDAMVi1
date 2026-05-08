@@ -1945,60 +1945,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ed8945c142f2864c8a27c181bddc142, type: 3}
---- !u!1 &416371634
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 416371636}
-  - component: {fileID: 416371635}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &416371635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416371634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f9a82726498e4645bdbafc32e3213af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pacmanPrefab: {fileID: 4982819892643613117, guid: d2ba774836fc50e4489b343c27951529, type: 3}
-  spawnPoint: {fileID: 996749748}
-  vidasIniciales: 3
-  currentPacman: {fileID: 0}
-  currentDifficulty: 0
-  duracion: 0
-  nivelesJugados: 0
-  bolasComidas: 0
-  fantasmasComidos: 0
-  nivelesCompletados: 0
---- !u!4 &416371636
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416371634}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2619407, y: 3.3998253, z: -0.008770534}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &434819382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2602,7 +2548,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 22
-      m_TileSpriteIndex: 22
+      m_TileSpriteIndex: 23
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2782,7 +2728,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 15
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4042,7 +3988,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 19
-      m_TileSpriteIndex: 19
+      m_TileSpriteIndex: 20
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4762,7 +4708,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4867,8 +4813,8 @@ Tilemap:
     m_Data: {fileID: 1464475513, guid: 64acdd826890ff5429e587723284eb00, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -823874152, guid: 64acdd826890ff5429e587723284eb00, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 12
@@ -4893,18 +4839,18 @@ Tilemap:
     m_Data: {fileID: 1744315403, guid: 64acdd826890ff5429e587723284eb00, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 1981284551, guid: 64acdd826890ff5429e587723284eb00, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1347774525, guid: 64acdd826890ff5429e587723284eb00, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 378846012, guid: 64acdd826890ff5429e587723284eb00, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -823874152, guid: 64acdd826890ff5429e587723284eb00, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 378846012, guid: 64acdd826890ff5429e587723284eb00, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: -618542575, guid: 64acdd826890ff5429e587723284eb00, type: 3}
   - m_RefCount: 1
+    m_Data: {fileID: -1347774525, guid: 64acdd826890ff5429e587723284eb00, type: 3}
+  - m_RefCount: 1
     m_Data: {fileID: 1210261500, guid: 64acdd826890ff5429e587723284eb00, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -198715010, guid: 64acdd826890ff5429e587723284eb00, type: 3}
   - m_RefCount: 1
@@ -14679,7 +14625,6 @@ SceneRoots:
   - {fileID: 2123228624}
   - {fileID: 996749748}
   - {fileID: 1094010984}
-  - {fileID: 416371636}
   - {fileID: 1294040443}
   - {fileID: 386468136}
   - {fileID: 623922148}

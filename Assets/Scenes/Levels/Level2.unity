@@ -1537,54 +1537,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8771752820397354954, guid: f4646e86013d5d14c83fb6c15a5689c4, type: 3}
   m_PrefabInstance: {fileID: 404963448}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &416371634
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 416371636}
-  - component: {fileID: 416371635}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &416371635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416371634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f9a82726498e4645bdbafc32e3213af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pacmanPrefab: {fileID: 4982819892643613117, guid: d2ba774836fc50e4489b343c27951529, type: 3}
-  spawnPoint: {fileID: 996749748}
-  vidasIniciales: 3
-  currentPacman: {fileID: 0}
---- !u!4 &416371636
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416371634}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2619407, y: 3.3998253, z: -0.008770534}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &425710051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7368,6 +7320,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2ba774836fc50e4489b343c27951529, type: 3}
+--- !u!1 &1094010985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4982819892643613117, guid: d2ba774836fc50e4489b343c27951529, type: 3}
+  m_PrefabInstance: {fileID: 1094010984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1095213834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11244,6 +11201,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8771752820397354954, guid: f4646e86013d5d14c83fb6c15a5689c4, type: 3}
   m_PrefabInstance: {fileID: 1705244290}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1789408705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1789408707}
+  - component: {fileID: 1789408706}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1789408706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789408705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f9a82726498e4645bdbafc32e3213af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pacmanPrefab: {fileID: 4982819892643613117, guid: d2ba774836fc50e4489b343c27951529, type: 3}
+  spawnPoint: {fileID: 996749748}
+  vidasIniciales: 3
+  currentPacman: {fileID: 1094010985}
+  currentDifficulty: 1
+  cerezaComida: 0
+  fresaComida: 0
+  platanoComido: 0
+  manzanaComida: 0
+  sandiaComida: 0
+  atupComida: 0
+  fresaInvComida: 0
+  duracion: 0
+  bolasComidas: 0
+  fantasmasComidos: 0
+  nivelesCompletados: 0
+  saver: {fileID: 0}
+--- !u!4 &1789408707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789408705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5799999, y: 2.37, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1798740326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11851,7 +11869,6 @@ SceneRoots:
   - {fileID: 1238952246}
   - {fileID: 996749748}
   - {fileID: 1094010984}
-  - {fileID: 416371636}
   - {fileID: 1463510429}
   - {fileID: 1276131613}
   - {fileID: 722088840}
@@ -11862,3 +11879,4 @@ SceneRoots:
   - {fileID: 663569449}
   - {fileID: 14846449}
   - {fileID: 551508154}
+  - {fileID: 1789408707}

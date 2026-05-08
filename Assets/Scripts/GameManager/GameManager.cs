@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
 
     public PlayerDataSaver saver;
 
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -275,5 +274,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+
 
 }
