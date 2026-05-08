@@ -11,6 +11,9 @@ public class PlayerDataSaver : MonoBehaviour
     {
         public string username;
         public int score;
+        public int gVolume;
+        public int mVolume;
+        public int eVolume;
     }
 
     public void GuardarDatos(string username, int score)
@@ -19,6 +22,9 @@ public class PlayerDataSaver : MonoBehaviour
         PlayerData data = new PlayerData();
         data.username = username;
         data.score = score;
+        data.gVolume = AudioSettings.instance.getGVolume();
+        data.mVolume = AudioSettings.instance.getMVolume();
+        data.eVolume = AudioSettings.instance.getEVolume();
 
         string json = JsonUtility.ToJson(data, true);
 

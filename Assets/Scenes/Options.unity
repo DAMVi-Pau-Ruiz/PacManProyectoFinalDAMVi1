@@ -758,7 +758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 439501411}
-  - component: {fileID: 439501410}
+  - component: {fileID: 439501412}
   m_Layer: 0
   m_Name: BackManager
   m_TagString: Untagged
@@ -766,18 +766,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &439501410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439501409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51c82c832d9aa8149a84a225db4b5e25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &439501411
 Transform:
   m_ObjectHideFlags: 0
@@ -793,6 +781,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &439501412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439501409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c29814216f913b4b9752987a60b399e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generalSlider: {fileID: 89572162}
+  musicSlider: {fileID: 209039502}
+  effectsSlider: {fileID: 468284658}
 --- !u!1 &440876764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,10 +1605,14 @@ PrefabInstance:
     - target: {fileID: 1769195111456327102, guid: fca18e128f3e7bb4297d86608d9bf17f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 439501410}
+      objectReference: {fileID: 439501412}
     - target: {fileID: 1769195111456327102, guid: fca18e128f3e7bb4297d86608d9bf17f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GetBack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769195111456327102, guid: fca18e128f3e7bb4297d86608d9bf17f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BackToMainMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6669200929085469204, guid: fca18e128f3e7bb4297d86608d9bf17f, type: 3}
       propertyPath: m_Name
