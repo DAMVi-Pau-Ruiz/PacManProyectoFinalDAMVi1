@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 89572161}
   - component: {fileID: 89572162}
+  - component: {fileID: 89572163}
   m_Layer: 5
   m_Name: GeneralSlider
   m_TagString: Untagged
@@ -212,6 +213,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &89572163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89572160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177c3cc44052b54598f40f1234ff600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 89572162}
+  text: {fileID: 910179239}
+  type: 0
 --- !u!1 &144264906
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 209039501}
   - component: {fileID: 209039502}
+  - component: {fileID: 209039503}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -436,6 +453,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &209039503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209039500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177c3cc44052b54598f40f1234ff600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 209039502}
+  text: {fileID: 991240128}
+  type: 1
 --- !u!1 &265990278
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,6 +1025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 468284657}
   - component: {fileID: 468284658}
+  - component: {fileID: 468284659}
   m_Layer: 5
   m_Name: EffectsSlider
   m_TagString: Untagged
@@ -1073,6 +1106,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &468284659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468284656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177c3cc44052b54598f40f1234ff600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 468284658}
+  text: {fileID: 2030511349}
+  type: 2
 --- !u!1 &500496824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,6 +1545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 89572162}
   text: {fileID: 910179239}
+  type: 0
 --- !u!114 &910179239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1835,6 +1884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 209039502}
   text: {fileID: 991240128}
+  type: 1
 --- !u!114 &991240128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2637,6 +2687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 468284658}
   text: {fileID: 2030511349}
+  type: 2
 --- !u!114 &2030511349
 MonoBehaviour:
   m_ObjectHideFlags: 0

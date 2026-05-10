@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -9,17 +7,41 @@ public class SliderValue : MonoBehaviour
     public Slider slider;
     public TMP_Text text;
 
-    // Start is called before the first frame update
-    void Start()
+    public enum VolumeType { Master, Music, SFX }
+    public VolumeType type;
+
+    private void Start()
     {
         UpdateValue(slider.value);
-
-        slider.onValueChanged.AddListener(UpdateValue);
+        slider.onValueChanged.AddListener(OnSliderChanged);
     }
 
-    // Update is called once per frame
-    void UpdateValue(float value)
+    private void OnSliderChanged(float value)
     {
-        text.text = Mathf.RoundToInt(value).ToString() + "%";
+        UpdateValue(value);
+
+        if (AudioSettings.instance == null) return;
+
+        int v = Mathf.RoundToInt(value);
+
+        switch (type)
+        {
+            case VolumeType.Master:
+                AudioSettings.instance.setGVolume(v);
+                break;
+
+            case VolumeType.Music:
+                AudioSettings.instance.setMVolume(v);
+                break;
+
+            case VolumeType.SFX:
+                AudioSettings.instance.setEVolume(v);
+                break;
+        }
+    }
+
+    private void UpdateValue(float value)
+    {
+        text.text = Mathf.RoundToInt(value) + "%";
     }
 }

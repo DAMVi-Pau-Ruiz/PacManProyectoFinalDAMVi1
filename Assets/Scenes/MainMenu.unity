@@ -632,6 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultVolume: 50
+  mixer: {fileID: 24100000, guid: e27abef6b5bcd9d469130f902d131f05, type: 2}
 --- !u!4 &584581827
 Transform:
   m_ObjectHideFlags: 0

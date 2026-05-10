@@ -24,13 +24,15 @@ public class MainMenuManager : MonoBehaviour
     public async void QuitGame()
     {
         AudioManager.Instance.PlaySFX(buttonClick);
-        await GameManager.instance.GuardarSesion();
-        Application.Quit();
+
+        if (GameManager.instance != null)
+            await GameManager.instance.GuardarSesion();
 
 #if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
 #endif
-
     }
     public void CreditLevel()
     {
