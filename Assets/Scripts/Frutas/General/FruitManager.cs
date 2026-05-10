@@ -13,6 +13,9 @@ public class FruitManager : MonoBehaviour
     [SerializeField]
     float timeBetweenFruits = 10;
 
+    [SerializeField]
+    public AudioClip fruitEaten;
+
     private float currentTimeBetweenFruits;
     private int fruitIndex;
     private bool fruitSpawned = false;
@@ -40,6 +43,7 @@ public class FruitManager : MonoBehaviour
 
     public void FrutaComida()
     {
+        AudioManager.Instance.PlaySFX(fruitEaten);
         fruitSpawned = false;
     }
 }

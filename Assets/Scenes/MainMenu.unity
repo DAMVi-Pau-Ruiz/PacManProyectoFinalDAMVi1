@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1903c425f4994f44b9d8b851b9550292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonClick: {fileID: 8300000, guid: ab93d7918a6d02c48a0fa68c19f8a4ab, type: 3}
+  buttonClick: {fileID: 8300000, guid: 44aff4882c0294e45acb9a1662e6388a, type: 3}
 --- !u!4 &513486145
 Transform:
   m_ObjectHideFlags: 0

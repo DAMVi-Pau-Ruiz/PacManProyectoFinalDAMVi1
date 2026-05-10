@@ -14,14 +14,11 @@ public class PacMan_Controller : MonoBehaviour
     [SerializeField]
     LayerMask capaPared;
 
-    /*[SerializeField]
-    public AudioClip deadSound;
+    [SerializeField]
+    private AudioClip deadSound;
 
     [SerializeField]
-    public AudioClip eatGhostSound;
-
-    [SerializeField]
-    public AudioClip moveSound;*/
+    private AudioSource moveSound;
 
     private Vector2 desiredDirection;
     private Vector2 currentDirection = Vector2.right;
@@ -102,10 +99,22 @@ public class PacMan_Controller : MonoBehaviour
 
             transform.position = pos;
 
-            animator.SetBool("isMoving", currentDirection != Vector2.zero);
-        }
+            bool isMoving = currentDirection != Vector2.zero;
 
-        /*AudioManager.Instance.PlaySFX(moveSound);*/
+            animator.SetBool("isMoving", isMoving);
+
+
+            if (isMoving && !isDead)
+            {
+                if (!moveSound.isPlaying)
+                    moveSound.Play();
+            }
+            else
+            {
+                if (moveSound.isPlaying)
+                    moveSound.Stop();
+            }
+        }
 
     }
 
@@ -194,11 +203,18 @@ public class PacMan_Controller : MonoBehaviour
     private void Dead()
     {
         isDead = true;
+
+        if (moveSound.isPlaying)
+            moveSound.Stop();
+
+        AudioManager.Instance.PlaySFX(deadSound);
+
         colider.enabled = false;
         transform.rotation = Quaternion.Euler(0, 0, 0);
+
         animator.SetBool("isDead", true);
+
         StartCoroutine(DeathSequence());
-        /*AudioManager.Instance.PlaySFX(deadSound);*/
 
     }
 
@@ -210,8 +226,6 @@ public class PacMan_Controller : MonoBehaviour
         FindObjectOfType<GhostsSpawner>().MarkGhostAsEaten(ghostName);
         gameObject.GetComponent<PacMan_Puntuaje>().addPuntos(collision.GetComponent<GhostsController>().GetPuntos());
         GameManager.instance.addGhostEaten();
-
-        /*AudioManager.Instance.PlaySFX(eatGhostSound);*/
 
     }
 

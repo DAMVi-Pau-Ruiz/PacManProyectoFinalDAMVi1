@@ -5978,6 +5978,7 @@ MonoBehaviour:
   ghostsSpawner: {fileID: 706085378}
   timeBetweenGhosts: 10
   respawnTime: 5
+  ghostEaten: {fileID: 8300000, guid: c2b75c26b2b76ce44b5d648b782ad2da, type: 3}
 --- !u!4 &623922148
 Transform:
   m_ObjectHideFlags: 0
@@ -10900,6 +10901,7 @@ MonoBehaviour:
   - {fileID: 4100925539627114012, guid: 3cd4deedc8c7e60429712f249ee37295, type: 3}
   fruitsSpawn: {fileID: 996749748}
   timeBetweenFruits: 30
+  fruitEaten: {fileID: 8300000, guid: 6467a08ca09c57c4086a6462a8f3498a, type: 3}
 --- !u!4 &1776919520
 Transform:
   m_ObjectHideFlags: 0
@@ -11174,6 +11176,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4646e86013d5d14c83fb6c15a5689c4, type: 3}
+--- !u!1 &1819961847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1819961849}
+  - component: {fileID: 1819961848}
+  m_Layer: 0
+  m_Name: Level4Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1819961848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819961847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016eeb3e96cf20b48b9e44c31403fef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic: {fileID: 8300000, guid: cbdd04d9ef4ec7c4cac6de1f08bf677c, type: 3}
+--- !u!4 &1819961849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819961847}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.302837, y: 8.130936, z: -0.38274977}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1821169048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12121,3 +12168,4 @@ SceneRoots:
   - {fileID: 1786899341}
   - {fileID: 1776919520}
   - {fileID: 1805395097}
+  - {fileID: 1819961849}

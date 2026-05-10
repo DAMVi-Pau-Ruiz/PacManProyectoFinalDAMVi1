@@ -5820,6 +5820,7 @@ MonoBehaviour:
   ghostsSpawner: {fileID: 706085378}
   timeBetweenGhosts: 10
   respawnTime: 5
+  ghostEaten: {fileID: 8300000, guid: c2b75c26b2b76ce44b5d648b782ad2da, type: 3}
 --- !u!4 &623922148
 Transform:
   m_ObjectHideFlags: 0
@@ -10413,6 +10414,7 @@ MonoBehaviour:
   - {fileID: 4100925539627114012, guid: 3cd4deedc8c7e60429712f249ee37295, type: 3}
   fruitsSpawn: {fileID: 996749748}
   timeBetweenFruits: 30
+  fruitEaten: {fileID: 8300000, guid: 6467a08ca09c57c4086a6462a8f3498a, type: 3}
 --- !u!4 &1776919520
 Transform:
   m_ObjectHideFlags: 0
@@ -11242,6 +11244,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &2081281083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2081281085}
+  - component: {fileID: 2081281084}
+  m_Layer: 0
+  m_Name: AudioLevel3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2081281084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081281083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb964e723ca8544eb5e0ccef89c805a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic: {fileID: 8300000, guid: cbdd04d9ef4ec7c4cac6de1f08bf677c, type: 3}
+--- !u!4 &2081281085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081281083}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.302837, y: 8.130936, z: -0.38274977}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2096208540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11712,3 +11759,4 @@ SceneRoots:
   - {fileID: 1776919520}
   - {fileID: 548646395}
   - {fileID: 1796296856}
+  - {fileID: 2081281085}

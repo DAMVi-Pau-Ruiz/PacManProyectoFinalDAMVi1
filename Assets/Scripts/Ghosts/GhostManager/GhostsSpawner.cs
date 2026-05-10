@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GhostsSpawner : MonoBehaviour
@@ -36,6 +37,9 @@ public class GhostsSpawner : MonoBehaviour
 
     [SerializeField]
     float respawnTime = 5f;  // Tiempo de reaparición de los fantasmas (en segundos)
+
+    [SerializeField]
+    public AudioClip ghostEaten;
 
     private float currentTimeBetweenGhosts;
     private bool blinkySpawned = false;
@@ -122,18 +126,22 @@ public class GhostsSpawner : MonoBehaviour
         switch (ghostName)
         {
             case "Blinky(Clone)":
+                AudioManager.Instance.PlaySFX(ghostEaten);
                 blinkyEaten = true;
                 blinkySpawned = false;
                 break;
             case "Pinky(Clone)":
+                AudioManager.Instance.PlaySFX(ghostEaten);
                 pinkyEaten = true;
                 pinkySpawned = false;
                 break;
             case "Inky(Clone)":
+                AudioManager.Instance.PlaySFX(ghostEaten);
                 inkyEaten = true;
                 inkySpawned = false;
                 break;
             case "Clyde(Clone)":
+                AudioManager.Instance.PlaySFX(ghostEaten);
                 clydeEaten = true;
                 clydeSpawned = false;
                 break;
