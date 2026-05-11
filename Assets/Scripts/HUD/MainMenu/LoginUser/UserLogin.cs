@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 public class UserLogin : MonoBehaviour
 {
@@ -119,10 +121,12 @@ public class UserLogin : MonoBehaviour
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.Save();
 
-        Debug.Log("Jugador: " + username);
+        UnityEngine.Debug.Log("Jugador: " + username);
 
         // Cargar mapa seleccionado
         string map = PlayerPrefs.GetString("SelectedMap", "Level1");
+
+        CargarConfigDesdeJava(username);
 
         SceneManager.LoadScene(map);
     }
@@ -133,5 +137,47 @@ public class UserLogin : MonoBehaviour
         characters[slots[0]] +
         characters[slots[1]] +
         characters[slots[2]];
+    }
+
+    private void CargarConfigDesdeJava(string username)
+    {
+        ProcessStartInfo psi = new ProcessStartInfo();
+        psi.FileName = "java";
+        psi.Arguments = $"-cp \"{Application.dataPath}/External/Java;{Application.dataPath}/External/Java/mysql-connector-j-8.x.x.jar\" readConfigFromDB {username}";
+        psi.RedirectStandardOutput = true;
+        psi.UseShellExecute = false;
+        psi.CreateNoWindow = true;
+
+        Process p = Process.Start(psi);
+        string output = p.StandardOutput.ReadToEnd();
+        p.WaitForExit();
+
+        UnityEngine.Debug.Log("Salida Java RAW: [" + output + "]");
+
+        output = output.Trim();
+
+        if (output == "NO_DATA")
+        {
+            UnityEngine.Debug.Log("Usuario sin configuración previa");
+            return;
+        }
+
+        string[] parts = output.Split(',');
+
+        if (parts.Length != 3)
+        {
+            UnityEngine.Debug.LogError("Salida Java inválida: " + output);
+            return;
+        }
+
+        int g = int.Parse(parts[0]);
+        int m = int.Parse(parts[1]);
+        int e = int.Parse(parts[2]);
+
+        AudioSettings.instance.setGVolume(g);
+        AudioSettings.instance.setMVolume(m);
+        AudioSettings.instance.setEVolume(e);
+
+        UnityEngine.Debug.Log($"Config cargada: G={g}, M={m}, E={e}");
     }
 }

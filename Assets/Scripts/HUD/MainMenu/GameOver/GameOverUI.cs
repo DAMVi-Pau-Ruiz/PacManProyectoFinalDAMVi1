@@ -15,7 +15,6 @@ public class GameOverUI : MonoBehaviour
 
         // guardar en ranking
         string username = PlayerPrefs.GetString("username", "AAA");
-        highscoreSystem.AddScore(username, score);
     }
 
     public void goScoreTable()
