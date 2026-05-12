@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da991384163cf44399ca07be9fd0eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 90
   duration: 25
 --- !u!114 &1186889167
 MonoBehaviour:
@@ -412,82 +412,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'CREDITS
-
-
-    DEVELOPMENT
-
-
-    Director
-
-    Samuel Fontanals & Pau Ruiz
-
-
-    Programming
-
-    Samuel
-    Fontanals & Pau Ruiz
-
-
-    Game Design
-
-    Samuel Fontanals & Pau Ruiz
-
-
-    ART
-
-
-    2D
-    Modeling
-
-    Pau Ruiz
-
-
-    Texturing
-
-    Samuel Fontanals & Pau Ruiz
-
-
-    Animation
-
-    Samuel
-    Fontanals & Pau Ruiz
-
-
-    UI / UX
-
-    Samuel Fontanals
-
-
-    AUDIO
-
-
-    External
-    Assets
-
-
-    TOOLS
-
-
-    Unity Engine
-
-    Pixilart
-
-    Photopea
-
-
-    SPECIAL
-    THANKS
-
-
-    To everyone who supported this project
-
-
-    THE END
-
-
-    Thank
-    you for playing'
+  m_text: "DEVELOPMENT\n\n_Programming_\nSamuel Fontanals\nPau Ruiz\n\n_Game Design_\nSamuel
+    Fontanals\nPau Ruiz\n\n\nART\n\n_2D Modeling_\nPau Ruiz\n\n_Texturing_\nSamuel
+    Fontanals\nPau Ruiz\n\n_Animation_\nSamuel Fontanals \nPau Ruiz\n\n_UI / UX_\nSamuel
+    Fontanals\n\nAUDIO\n\nMyInstants\nYT - arsenix1987\nYT - GameMusic\n\nTOOLS\n\nUnity
+    Engine\nPixilart\nPhotopea\n\nSPECIAL THANKS\n\nTo everyone who supported this
+    project\n\nThank you for playing"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f9129517a270fa84ba3522d0957ab6d6, type: 2}
   m_sharedMaterial: {fileID: -3669625885843318771, guid: f9129517a270fa84ba3522d0957ab6d6, type: 2}
